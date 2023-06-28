@@ -9,3 +9,7 @@ $host=""
 $username=""
 $password=""
 $dbname=""
+
+class Dbconnect{
+
+}
