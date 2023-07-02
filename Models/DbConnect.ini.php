@@ -1,15 +1,5 @@
-[Localhost]
-$host="localhost:3388"
-$username="root"
-$password=""
-$dbname=""
+$localhost = "localhost:3306"
+$Username = "root"
+$Password = ""
+$Dbname = ""
 
-[Server]
-$host=""
-$username=""
-$password=""
-$dbname=""
-
-class Dbconnect{
-
-}
