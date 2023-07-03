@@ -3,9 +3,14 @@ class Connect_Database
 {
     public $ObjConnect;
 
-    private function __construct()
+    public function Connect_Database()
     {
-        $this->ObjConnect = mysqli_connect("localhost:33886", "root", "root", "");
+        $this->ObjConnect =new mysqli("localhost:33886", "root", "root", "orderfoodonline");
+        if (!$this->ObjConnect) {
+            die("การเชื่อมต่อฐานข้อมูลล้มเหลว: " . $this->ObjConnect->connect_error);
+            exit();
+        }
+        exit();
     }
 /**
  * @param string $colname สำหรับใส่ข้อมูล colnameให้ตรงกับฐานข้อมูล
@@ -13,13 +18,13 @@ class Connect_Database
  * @param string $Sort
  * @return 
  */
-    public function SelectTable(string $colname = "*", string $TableName = "", string $Sort = "ASC"): object
+    public function SelectTable(string $colname = "" ?? "*", string $TableName = "", string $Sort = "" ?? "ASC"): object
     {
         if ($TableName != "") {
             $sql = "SELECT " . $colname . " FROM " . $TableName . " ORDER BY " . $Sort;
-            return mysqli_query($this->ObjConnect, $sql);
+            return $this->ObjConnect->query($sql);
         }
-        
+        $this->ObjConnect->close();
         return false;
     }
 
