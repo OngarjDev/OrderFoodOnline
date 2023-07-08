@@ -1,5 +1,5 @@
 <?php 
-class Connect_Database
+class connect_database
 {
     public $ObjConnect;
 
