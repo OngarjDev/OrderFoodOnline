@@ -30,18 +30,31 @@ Class login{
             header("location: ../Views/login.php?Info_Get=ไม่พบผู้ใช้ในระบบ"); 
         }
     }
-    public function VerifyPermisionAndSyncData():bool{
+    /**
+     * มีไว้เพื่อกรณีที่ข้อมูลอัพเดตแล่วแต่Session ไม่อัพเดตตาม และ ตรวจสอบเมื่อถูกระงับการใช้งาน
+     * @return คือค่าที่Client ถือสิทธิ Role นั้น หากโดนระงับหรือยังไม่อนุมัติจะส่งค่า WaitPermisionSCR(รออนุมัติ),SuspensionSCR(โดนระงับ)
+     */
+    public function VerifyPermisionAndSyncData():String{
         $IdUser = $_SESSION['IdUser_Session'];
         $result = $this->DataBase->SelectTable("IdAll,NameAll,,RoleAll,WaitPermisionSCR,SuspensionSCR","users","Where IdAll = '$IdUser'");
-        if($result->num_rows > 0){
-            return true;
+        $result = $result->fetch_assoc();
+        if($result['WaitPermisionSCR'] == 0){
+            if($result['SuspensionSCR'] == 1){
+
+            }
         }else{
-            return false;
+        $_SESSION['IdUser_Session'] = $result['IdAll'];
+        $_SESSION['Name_Session'] = $result['NameAll'];
+        $_SESSION['Role_Session'] = $result['RoleAll'];
         }
+        return $_SESSION['Role_Session'];
     }
     public function Logout(){
         session_destroy();
         header('localtion: ../Views/index.php?Info=ออกระบบเรียบร้อย');
+    }
+    public function Register($request){
+        
     }
 }
 ?>

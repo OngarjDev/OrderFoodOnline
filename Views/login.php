@@ -14,7 +14,7 @@
       <div class="col-4"></div>
       <div class="col-4 mt-5">
         <main class="form-signin">
-          <form action="../Controllers/login.ctr.php?action=login" method="POST">
+          <form action="../Controllers/login.ctr.php?action_Get=login" method="POST">
           <img class="mb-43 rounded-circle mx-auto d-block" src="../Src/Images/Login.jpg"width="120" height="120">
             <h1 class="h3 mb-3 fw-normal text-center">เข้าสู่ระบบ</h1>
             <div class="form-floating">
