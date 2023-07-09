@@ -30,24 +30,31 @@ Class login{
             header("location: ../Views/login.php?Info_Get=ไม่พบผู้ใช้ในระบบ"); 
         }
     }
+
+    // public function PermisionAccount():bool{
+    //     $result = $this->DataBase->SelectTable("RoleAll,WaitPermisionSCR,SuspensionSCR","users","Where IdAll = '{$_SESSION['IdUser_Session']}'")->fetch_assoc();
+    //     $if($result['RoleAll'] != 'Admin'){
+    //         if($result['WaitPermisionSCR'] == 0){
+    //             
+    //         }else{
+    //             if($result['WaitPermisionSCR'] == 1){
+
+    //             }
+    //         }
+    //     }else{
+    //         return true;
+    //     }
+    // }
+    
     /**
-     * มีไว้เพื่อกรณีที่ข้อมูลอัพเดตแล่วแต่Session ไม่อัพเดตตาม และ ตรวจสอบเมื่อถูกระงับการใช้งาน
+     * มีไว้ UpdateSession
      * @return คือค่าที่Client ถือสิทธิ Role นั้น หากโดนระงับหรือยังไม่อนุมัติจะส่งค่า WaitPermisionSCR(รออนุมัติ),SuspensionSCR(โดนระงับ)
      */
-    public function VerifyPermisionAndSyncData():String{
-        $IdUser = $_SESSION['IdUser_Session'];
-        $result = $this->DataBase->SelectTable("IdAll,NameAll,,RoleAll,WaitPermisionSCR,SuspensionSCR","users","Where IdAll = '$IdUser'");
-        $result = $result->fetch_assoc();
-        if($result['WaitPermisionSCR'] == 0){
-            if($result['SuspensionSCR'] == 1){
-
-            }
-        }else{
+    public function SyncSession(){
+        $result = $this->DataBase->SelectTable("IdAll,NameAll,RoleAll","users","Where IdAll = '{$_SESSION['IdUser_Session']}'")->fetch_assoc();
         $_SESSION['IdUser_Session'] = $result['IdAll'];
         $_SESSION['Name_Session'] = $result['NameAll'];
         $_SESSION['Role_Session'] = $result['RoleAll'];
-        }
-        return $_SESSION['Role_Session'];
     }
     public function Logout(){
         session_destroy();
@@ -57,4 +64,3 @@ Class login{
         
     }
 }
-?>

@@ -28,9 +28,10 @@
             <button class="w-100 btn btn-lg btn-primary" type="submit">เข้าสู่ระบบ</button>
             <p class="mt-2 text-center">สำหรับ ผู้ใช้/ร้านค้า/ผู้ส่ง/ผู้ดูแลระบบ</p>
           </form>
+          <a class="text-center" href="register.php">สมัครเข้าใช้งาน</a>
+          <a class="text-center" href="index.php">กลับไปยังหน้าแรก</a>
         </main>
       </div>
       <div class="col-4"></div>
 </body>
-
 </html>
