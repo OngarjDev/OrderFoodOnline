@@ -1,9 +1,9 @@
 <?php
-function autoloadClasses($className)
-{
+spl_autoload_register(function ($className) {
     $classMap = [
         'services' => 'Services/' . $className . '.service.php',
         'dbconnect' => 'Models/' . $className . '.inc.php',
+        'Models' => 'Models/' . $className . '.model.php',
     ];
     
     foreach ($classMap as $class => $path) {
@@ -14,8 +14,5 @@ function autoloadClasses($className)
             return;
         }
     }
-}
-
-spl_autoload_register('autoloadClasses');
-
+});
 ?>
