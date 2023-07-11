@@ -25,9 +25,9 @@ Class login{
             case "Shop" : $path = "Shop"; break;
             case "Rider" : $path = "Rider"; break;
             }
-            header("location: ../Views/$path/");
+            header("location: ../Views/Shares/$path/");
         }else{
-            header("location: ../Views/login.php?Info_Get=ไม่พบผู้ใช้ในระบบ"); 
+            header("location: ../Views/Shares/login.php?Info_Get=ไม่พบผู้ใช้ในระบบ"); 
         }
     }
 
@@ -58,9 +58,9 @@ Class login{
     }
     public function Logout(){
         session_destroy();
-        header('localtion: ../Views/index.php?Info=ออกระบบเรียบร้อย');
+        header('localtion: ../Views/Customer/index.php?Info=ออกระบบเรียบร้อย');
     }
     public function Register($request){
-        
+        $this->DataBase->InsertTable('users','NameAll,PasswordAll,DescriptionShop,AddressCustomer,ImageAll,RoleAll,TypeShopS',"",null);
     }
 }

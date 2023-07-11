@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../Src/Bootstrap/Css/Bootstrap.min.css">
+  <?php include'header.layout.php'?>  
   <title>ลงทะเบียนเข้าใช้งาน</title>
 </head>
 
@@ -15,7 +15,7 @@
       <div class="col-4 mt-5">
         <main class="form-signin mt-5">
           <?php if (isset($_REQUEST['TypeAccount_Get'])) {
-            require '../Includes/autoload.inc.php';
+            require '../../Includes/autoload.inc.php';
             $dataInput = new data_input();
           ?>
 
@@ -26,7 +26,7 @@
                 if ($accountType === $_REQUEST['TypeAccount_Get']) :
               ?>
 
-                  <p class="text-center">ประเภทบัญชีที่คุณจะสมัคร : <?= $accountType ?></p>
+                  <p class="text-center">ประเภทบัญชีที่คุณจะสมัคร : <?= $accountType ?> <a href="register.php">เปลี่ยน</a></p>
 
                   <?php foreach ($inputs as $input) { ?>
                     <label><?= $input->label ?></label> <br>
@@ -37,7 +37,7 @@
                       <input class="w-100 form-control" type="<?= $input->type ?>" name="<?= $input->name; ?>" placeholder="<?= $input->placeholder; ?>">
                     <?php } elseif ($input->type === 'file') { ?>
                       <img id="imagePreview" src="#" alt="Preview Image" hidden/>
-                      <input class="form-control" type="file" name="<?= $input->name ?>">
+                      <input class="form-control" type="file" name="<?= $input->name ?>" accept="image/png, image/jpeg">
                     <?php } ?>
                     <br>
                   <?php } ?>
@@ -51,13 +51,14 @@
           <?php } else { ?>
             <form action="register.php" method="Get" class="form-control">
               <h3 class="text-center">สมัครบัญชีของคุณ</h3>
+              <label>ประเภทบัญชี</label>
               <select class="form-select" name="TypeAccount_Get" required>
                 <option value="" selected>เลือกประเภทบัญชีของคุณ</option>
                 <option value="Customer">ลูกค้า</option>
                 <option value="Shop">ร้านอาหาร</option>
                 <option value="Rider">ผู้ส่งสินค้า</option>
               </select>
-              <button type="submit" class="w-100 btn-primary mt-2">เลือกประเภทบัญชี</button>
+              <button type="submit" class="w-100 btn btn-primary mt-2">เลือกประเภทบัญชี</button>
             </form>
           <?php } ?>
           <div class="row">

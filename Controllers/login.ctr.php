@@ -1,28 +1,47 @@
 <?php
 require_once '../Includes/autoload.inc.php';
 
-class Login_Controller {
+class Login_Controller
+{
     protected $service;
+    protected $manageimage;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->service = new login();
+        // $this->manageimage = new manageimage();
     }
 
-    public function handleRequest() {
+    public function handleRequest()
+    {
         switch ($_REQUEST['action_Get']) {
-            case 'login': $this->handleLogin();break;
-            case 'logout': $this->handleLogout();break;
-            case 'register': $this->handleRegister();break;
-            default: header('location: ../Views/login.php?Info=ขออภัยเราไม่พบ Actionในระบบของคุณ');
+            case 'login':
+                $this->handleLogin();
+                break;
+            case 'logout':
+                $this->handleLogout();
+                break;
+            case 'register':
+                $this->handleRegister();
+                break;
+            default:
+                header('location: ../Views/Shares/login.php?Info=ขออภัยเราไม่พบ Actionในระบบของคุณ');
         }
     }
-    private function handleLogin(){
+    private function handleLogin()
+    {
         $this->service->Login($_REQUEST);
     }
-    private function handleRegister(){
+    private function handleRegister()
+    {
+        $file = $_FILES['Image_Post'];
+        $fileName = $file['name'];
+        $fileTmpName = $file['tmp_name'];
+
         $this->service->Register($_REQUEST);
     }
-    private function handleLogout(){
+    private function handleLogout()
+    {
         $this->service->Logout();
     }
 }

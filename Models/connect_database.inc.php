@@ -39,7 +39,7 @@ public function SelectTable(?string $colname = null, string $TableName = "",?str
  * ตัวอย่าง ใส่คำสั่ง Sql อะไรก็ได้
  * return หากtrue ข้อมูลถูกเพิ่ม หากเป็นfalse เพิ่มไม่สำเร็จ
  */
-    public function InsertTable(string $TableName, string $colname,string $Data,string $sqlcustom) : bool
+    public function InsertTable(string $TableName, string $colname,string $Data,?string $sqlcustom) : bool
     {
         if ($TableName != "") {
             $sql = "INSERT INTO " . $TableName . "(" . $colname . ") VALUES (" . $Data . " )".$sqlcustom;

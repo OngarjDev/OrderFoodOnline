@@ -4,11 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php include '../Shares/header.layout.php' ?>
   <title>หน้าหลัก</title>
 </head>
 
 <body>
-<script></script>
+  <?php include 'navbar.layout.php' ?>
+  <main>
+  </main>
+  <?= include '../Shares/footer.layout.php' ?>
 </body>
-<script> window.location.href = "Customer/index.php";</script>
+
 </html>
