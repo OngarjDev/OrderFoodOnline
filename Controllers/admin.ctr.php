@@ -15,9 +15,6 @@ class Login_Controller
             case 'AddTypeShop':
                 $this->handleAddTypeShop();
                 break;
-            case 'DeleteTypeShop':
-                // $this->handleRegister();
-                break;
             default:
                 header("location: " . $_SERVER['HTTP_REFERER'] . "?Info=" . urlencode("ขออภัยเราไม่พบ Actionในระบบของคุณ"));
                 exit;

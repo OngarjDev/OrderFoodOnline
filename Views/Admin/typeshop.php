@@ -18,12 +18,11 @@
             </div>
         </form>
         <div class="table-responsive mt-2">
-            <table class="table text-center">
+            <table class="table text-center table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">ไอดี</th>
                         <th scope="col">ชื่อประเภทร้านอาหาร</th>
-                        <th scope="col">จัดการประเภทร้านอาหาร</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +35,6 @@
                     <tr>
                         <th scope="row"><?=$row['IdTypeShop']?></th>
                         <td><?=$row['NameTypeShop']?></td>
-                        <td><button class="btn btn-danger w-50" onclick="">ลบ</button></td>
                     </tr>
                     <?php endforeach ?>
                 </tbody>
@@ -44,5 +42,4 @@
         </div>
     </main>
 </body>
-
 </html>

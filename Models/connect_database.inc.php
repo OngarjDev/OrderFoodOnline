@@ -68,10 +68,9 @@ public function SelectTable(?string $colname = null, string $TableName = "",?str
  * ตัวอย่างการส่ง "iduser = 5"
  * @return หากtrue ข้อมูลถูกลบ หากเป็นfalse ลบไม่สำเร็จ
  */
-    public function DeleteTable(string $TableName, string $Where) : bool
+    public function DeleteData(string $TableName, string $Where) : bool
     {
         $sql = "DELETE FROM " . $TableName . " WHERE " . $Where;
-        $this->ObjConnect->close();
         return $this->ObjConnect->query($sql);
     }
     // public function InnerJoin(){

@@ -10,7 +10,44 @@
 
 <body>
   <?php include 'navbar.layout.php' ?>
-  <main>
+  <main class="container">
+    <div class="table-responsive">
+      <table class="table text-center table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ไอดี</th>
+            <th scope="col">ชื่อผู้ใช้</th>
+            <th scope="col">รายละเอียด(ร้านค้า)</th>
+            <th scope="col">ที่อยู่(ร้านค้า,ลูกค้า)</th>
+            <th scope="col">คำขอเข้าใช้งาน</th>
+            <th scope="col">สถานะถูกพักบัญชี</th>
+            <th scope="col">ประเภทบัญชี</th>
+            <th scope="col">ประเภทร้านอาหาร(ร้านอาหาร)</th>
+            <th scope="col">จัดการบัญชี</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          require_once '../../Includes/autoload.inc.php';
+          $service = new connect_database();
+          $result = $service->SelectTable(null, "users");
+          foreach ($result as $row) :
+          ?>
+            <tr>
+              <th scope="row"><?= $row['idAll'] ?></th>
+              <td><?= $row['NameAll'] ?></td>
+              <td><?= $row['DescriptionShop'] ?? "-"?></td>
+              <td><?= $row['AddressCustomer'] ?? "-"?></td>
+              <td><?php if($row['WaitPermisionSCR'] == 1 || $row['RoleAll'] == "Admin"){echo "อนุญาติ";}else{echo "ยังไม่อนุญาติ";}?></td>
+              <td><?php if($row['SuspensionSCR'] == 0 || $row['RoleAll'] == "Admin"){echo "ไม่ถูกระงับ";}else{echo "ถูกระงับการใช้งาน";}?></td>
+              <td><?= $row['RoleAll']?></td>
+              <td><?php echo $service->SelectTable(null, "typeshop", "WHERE IdTypeShop = " . ($row['IdTypeShop'] ?? 0))->fetch_assoc()['NameTypeShop'] ?? "-"; ?></td>
+              <td>df</td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
+    </div>
   </main>
 </body>
 
