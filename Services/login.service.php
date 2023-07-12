@@ -25,7 +25,7 @@ Class login{
             case "Shop" : $path = "Shop"; break;
             case "Rider" : $path = "Rider"; break;
             }
-            header("location: ../Views/Shares/$path/");
+            header("location: ../Views/$path/");
         }else{
             header("location: ../Views/Shares/login.php?Info_Get=ไม่พบผู้ใช้ในระบบ"); 
         }
@@ -61,6 +61,9 @@ Class login{
         header('localtion: ../Views/Customer/index.php?Info=ออกระบบเรียบร้อย');
     }
     public function Register($request){
-        $this->DataBase->InsertTable('users','NameAll,PasswordAll,DescriptionShop,AddressCustomer,ImageAll,RoleAll,TypeShopS',"",null);
+        $this->DataBase->InsertTable('users','NameAll,PasswordAll,DescriptionShop,AddressCustomer,ImageAll,RoleAll,IdTypeShop',
+        "'{$request['UserName_Post']}','{$request['Password_Post']}','{$request['Description_Post']}','{$request['Address_Post']}','{$request['ImagePath_Post']}','{$request['type_account']}','{$request['IdTypeShop_Post']}'",
+        null);
+        $this->Login($request);
     }
 }

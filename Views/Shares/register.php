@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php include'header.layout.php'?>  
+  <?php include 'header.layout.php' ?>
   <title>ลงทะเบียนเข้าใช้งาน</title>
 </head>
 
@@ -13,14 +13,14 @@
     <div class="row">
       <div class="col-4"></div>
       <div class="col-4 mt-5">
-        <main class="form-signin mt-5">
+        <main class="form-signin mt-3">
           <?php if (isset($_REQUEST['TypeAccount_Get'])) {
             require '../../Includes/autoload.inc.php';
             $dataInput = new data_input();
           ?>
 
-            <form action="../Controllers/login.ctr.php?action_Get=register" method="Post" class="form-control" enctype="multipart/form-data">
-              <h1 class="text-center">สมัครสมาชิก</h1>
+            <form action="../../Controllers/login.ctr.php?action_Get=register&type_account=<?=$_REQUEST['TypeAccount_Get']?>" method="Post" class="form-control" enctype="multipart/form-data">
+              <h1 class="text-center mt-2">สมัครสมาชิก</h1>
 
               <?php foreach ($dataInput->formInputs as $accountType => $inputs) {
                 if ($accountType === $_REQUEST['TypeAccount_Get']) :
@@ -36,8 +36,19 @@
                     <?php } elseif ($input->type === 'text' || $input->type === 'password') { ?>
                       <input class="w-100 form-control" type="<?= $input->type ?>" name="<?= $input->name; ?>" placeholder="<?= $input->placeholder; ?>">
                     <?php } elseif ($input->type === 'file') { ?>
-                      <img id="imagePreview" src="#" alt="Preview Image" hidden/>
+                      <img id="imagePreview" src="#" alt="Preview Image" hidden />
                       <input class="form-control" type="file" name="<?= $input->name ?>" accept="image/png, image/jpeg">
+                    <?php } elseif ($input->type === 'select') { ?>
+                      <select class="form-select" name="IdTypeShop_Post" required>
+                        <option value="" selected>เลือกประเภทร้านอาหารของคุณ</option>
+                        <?php
+                        require '../../Includes/autoload.inc.php';
+                        $service = new connect_database();
+                        $result = $service->SelectTable(null, "typeshop");
+                        foreach ($result as $row) { ?>
+                          <option value="<?= $row['IdTypeShop'] ?>"><?= $row['NameTypeShop'] ?></option>
+                        <?php } ?>
+                      </select>
                     <?php } ?>
                     <br>
                   <?php } ?>
@@ -61,7 +72,7 @@
               <button type="submit" class="w-100 btn btn-primary mt-2">เลือกประเภทบัญชี</button>
             </form>
           <?php } ?>
-          <div class="row">
+          <div class="row mb-5">
             <div class="col">
               <a href="index.php" class=" w-100">กลับไปยังหน้าหลัก</a>
             </div>

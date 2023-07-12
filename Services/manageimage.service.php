@@ -10,6 +10,6 @@ class manageimage
         $uploadDirectory = '../Data/Images/';
         $targetFilePath = $uploadDirectory . $fileName;
         move_uploaded_file($fileTmpName, $targetFilePath);
-        return 
+        return "../".$targetFilePath;
     }
 }

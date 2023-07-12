@@ -9,7 +9,7 @@ class Login_Controller
     public function __construct()
     {
         $this->service = new login();
-        // $this->manageimage = new manageimage();
+        $this->manageimage = new manageimage();
     }
 
     public function handleRequest()
@@ -37,6 +37,8 @@ class Login_Controller
         $file = $_FILES['Image_Post'];
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
+        $pathImage = $this->manageimage->MoveFile($fileName,$fileTmpName);
+        $_REQUEST['ImagePath_Post'] = $pathImage ?? null;
 
         $this->service->Register($_REQUEST);
     }
