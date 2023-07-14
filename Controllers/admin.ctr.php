@@ -15,14 +15,19 @@ class Login_Controller
             case 'AddTypeShop':
                 $this->handleAddTypeShop();
                 break;
+            case 'PermisionUser':
+                $this->handlePermisionUser();
+                break;
             default:
                 header("location: " . $_SERVER['HTTP_REFERER'] . "?Info=" . urlencode("ขออภัยเราไม่พบ Actionในระบบของคุณ"));
-                exit;
         }
     }
     private function handleAddTypeShop()
     {
         $this->admin->AddTypeShop($_REQUEST);
+    }
+    private function handlePermisionUser(){
+        $this->admin->PermisionUser($_REQUEST);
     }
 }
 

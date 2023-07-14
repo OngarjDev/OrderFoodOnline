@@ -59,7 +59,6 @@ public function SelectTable(?string $colname = null, string $TableName = "",?str
     public function UpdateTable(string $TableName, string $colname_Data, string $Where) : bool
     {
         $sql = "UPDATE " . $TableName . " SET " . $colname_Data . " WHERE " . $Where;
-        $this->ObjConnect->close();
         return $this->ObjConnect->query($sql);
     }
 /**

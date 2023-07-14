@@ -11,7 +11,7 @@ Class login{
         $UserName = $request['UserName_Post'];
         $Password = $request['Password_Post'];
         $result = $this->DataBase->SelectTable(
-        "IdAll,NameAll,RoleAll,WaitPermisionSCR,SuspensionSCR",
+        "IdAll,NameAll,RoleAll,AccessStatusSCR",
         "users",
         "Where NameAll = '$UserName' AND PasswordAll = '$Password'");
         if($result->num_rows > 0){
