@@ -57,14 +57,7 @@
 
                         <button type="submit" class="w-100 btn btn-primary mt-2 mb-2">แก้ไขข้อมูล</button>
                     </form>
-                    <div class="row mb-5">
-                        <div class="col">
-                            <a href="index.php" class=" w-100">กลับไปยังหน้าหลัก</a>
-                        </div>
-                        <div class="col">
-                            <a href="login.php" class=" w-100">เข้าสู่ระบบ</a>
-                        </div>
-                    </div>
+                        <div class="text-center"><a  href="<?=$_SERVER['HTTP_REFERER']?>">กลับไปยังหน้าเดิม</a></div>
                 </main>
             </div>
             <div class="col-4"></div>
