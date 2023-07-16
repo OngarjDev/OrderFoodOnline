@@ -1,5 +1,5 @@
 <?php
-require '../Includes/autoload.inc.php';
+require_once dirname(__DIR__) . '/Includes/autoload.inc.php';
 class login
 {
     public $DataBase;
@@ -43,21 +43,18 @@ class login
         }
     }
 
-    // public function CheckAuthorization(){
-    //     $result = $this->DataBase->SelectTable("RoleAll,AccessStatusSCR","users","Where IdAll = '{$_SESSION['IdUser_Session']}'")->fetch_assoc();
-    //     if($result['AccessStatusSCR'] == 1 || $result['RoldAll'] == "Admin"){
-    //             $this->SyncSession();
-    //             $lastPosition = basename($_SERVER['REQUEST_URI']);
-    //             $directory = dirname($lastPosition);
-    //             if($directory == $result['RoldAll']){
-
-    //             }else{
-    //                 header("location: ../Views/Shares/login.php?Info_Get=คุณไม่มีสิทธิเข้าถึงหน้าดังกล่าว");
-    //             }            
-    //     }else{
-    //         header("location: ../Views/Shares/permision.php");
-    //     }
-    // }
+    public function CheckAuthorization(){
+        $result = $this->DataBase->SelectTable("RoleAll,AccessStatusSCR","users","Where IdAll = '{$_SESSION['IdUser_Session']}'")->fetch_assoc();
+        if($result['AccessStatusSCR'] == 1 || $result['RoleAll'] == "Admin"){
+                $this->SyncSession();
+                $lastPosition = basename($_SERVER['REQUEST_URI']);
+                if($lastPosition != $result['RoleAll']){
+                    header("location: ../../Views/Shares/login.php?Info_Get=คุณไม่มีสิทธิเข้าถึงหน้าดังกล่าว");
+                }            
+        }else{
+            header("location: ../../Views/Shares/permision.php");
+        }
+    }
 
     /**
      * มีไว้ UpdateSession

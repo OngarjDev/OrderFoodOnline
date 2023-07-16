@@ -76,11 +76,7 @@ class Login_Controller
         }
         header("location: ../Views/$path/");
     }
-    // private function handleCheckAuth(){
-    //     $this->service->CheckAuthorization();
-    // }
 }
 
-// สร้างอ็อบเจกต์ของคลาส Controller และเรียกใช้เมธอด index()
 $controller = new Login_Controller();
 $controller->handleRequest();

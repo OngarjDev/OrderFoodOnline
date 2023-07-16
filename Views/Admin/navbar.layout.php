@@ -1,8 +1,7 @@
 <?php
-// require_once '../../Includes/autoload.inc.php';
-// $auth = new login();
-// $auth->SyncSession();
-// $auth->CheckAuthorization();
+require_once '../../Includes/autoload.inc.php';
+$auth = new login();
+$auth->CheckAuthorization();
 ?>
 <header class="p-3 mb-3 border-bottom">
     <div class="container">

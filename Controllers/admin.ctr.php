@@ -31,6 +31,5 @@ class Login_Controller
     }
 }
 
-// สร้างอ็อบเจกต์ของคลาส Controller และเรียกใช้เมธอด index()
 $controller = new Login_Controller();
 $controller->handleRequest();

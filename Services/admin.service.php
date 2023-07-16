@@ -1,5 +1,5 @@
 <?php 
-require_once '../Includes/autoload.inc.php';
+require_once dirname(__DIR__) .'/Includes/autoload.inc.php';
 class admin{
     protected $service;
     public function __construct()
