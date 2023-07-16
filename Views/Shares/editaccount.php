@@ -55,7 +55,7 @@
                         <?php endif;
                         } ?>
 
-                        <button type="submit" class="w-100 btn btn-primary mt-2 mb-2">สมัครเข้าใช้งาน</button>
+                        <button type="submit" class="w-100 btn btn-primary mt-2 mb-2">แก้ไขข้อมูล</button>
                     </form>
                     <div class="row mb-5">
                         <div class="col">

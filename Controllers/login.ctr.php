@@ -26,6 +26,7 @@ class Login_Controller
                 break;
             case 'editaccount':
                 $this->headerEditAccount();
+                break;
             default:
                 header('location: ../Views/Shares/login.php?Info=ขออภัยเราไม่พบ Actionในระบบของคุณ');
         }
@@ -36,11 +37,13 @@ class Login_Controller
     }
     private function handleRegister()
     {
+        if (!empty($_FILES['Image']['tmp_name'])) {
         $file = $_FILES['Image_Post'];
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
         $pathImage = $this->manageimage->MoveFile($fileName, $fileTmpName);
         $_REQUEST['ImagePath_Post'] = $pathImage ?? null;
+        }
 
         $this->service->Register($_REQUEST);
     }
@@ -49,7 +52,29 @@ class Login_Controller
         $this->service->Logout();
     }
     private function headerEditAccount(){
+        if (!empty($_FILES['Image']['tmp_name'])) {
+        $file = $_FILES['Image_Post'];
+        $fileName = $file['name'];
+        $fileTmpName = $file['tmp_name'];
+        $pathImage = $this->manageimage->MoveFile($fileName, $fileTmpName);
+        $_REQUEST['ImagePath_Post'] = $pathImage ?? null;
+        }
         $this->service->EditAccount($_REQUEST);
+        switch ($_SESSION['Role_Session']) {
+            case "Admin":
+                $path = "Admin";
+                break;
+            case "Customer":
+                $path = "Customer";
+                break;
+            case "Shop":
+                $path = "Shop";
+                break;
+            case "Rider":
+                $path = "Rider";
+                break;
+        }
+        header("location: ../Views/$path/");
     }
     // private function handleCheckAuth(){
     //     $this->service->CheckAuthorization();

@@ -3,6 +3,7 @@ require '../Includes/autoload.inc.php';
 class login
 {
     public $DataBase;
+    public $login;
     public function __construct()
     {
         $this->DataBase = new connect_database();
@@ -86,32 +87,24 @@ class login
     }
     public function EditAccount($request)
     {
-        $data_old = $this->DataBase->SelectTable(null, "user", "Where idAll = " . $request['IdUser_Get'])->fetch_assoc();
+        $data_old = $this->DataBase->SelectTable(null, "users", "Where idAll = " . $request['IdUser_Get'])->fetch_assoc();
+        $UserName = $request['UserName_Post'] !== "" ? $request['UserName_Post'] : $data_old['NameAll'];
+        $Password = $request['Password_Post'] !== "" ? $request['Password_Post'] : $data_old['PasswordAll'];
+        $Description = $request['Description_Post'] !== "" ?  $request['Description_Post'] : $data_old['DescriptionShop'];
+        $Address =  $request['Address_Post'] !== "" ?  $request['Address_Post'] : $data_old['Address_Post'];
+        $Image =  $request['ImagePath_Post'] !== "" ?  $request['ImagePath_Post'] : $data_old['ImageAll'];
+        $IdTypeShop =  $request['IdTypeShop_Post'] !== "" ?  $request['IdTypeShop_Post'] : $data_old['IdTypeShop'];
+        if($IdTypeShop == ""){ $IdTypeShop = "null";}
         $this->DataBase->UpdateTable(
             "users",
-            "NameAll = "
-                . $request['UserName_Post'] ?? $data_old['NameAll']
-                . ",PasswordAll = " . $request['Password_Post'] ?? $data_old['PasswordAll']
-                . ",DescriptionShop = " . $request['Description_Post'] ?? $data_old['DescriptionShop']
-                . ",AddressCustomer = " . $request['Address_Post'] ?? $data_old['AddressCustomer']
-                . ",ImageAll" . $request['ImagePath_Post'] ?? $data_old['ImageAll']
-                . ",IdTypeShop" . $request['IdTypeShop_Post'] ?? $data_old['IdTypeShop'],
-            ""
+            "NameAll = '" . $UserName
+                . "',PasswordAll = '" . $Password
+                . "',DescriptionShop = '" . $Description
+                . "',AddressCustomer = '" . $Address
+                . "',ImageAll = '" . $Image
+                . "',IdTypeShop = " . $IdTypeShop,
+            "idAll = " . $request['IdUser_Get']
         );
-        switch ($_SESSION['Role_Session']) {
-            case "Admin":
-                $path = "Admin";
-                break;
-            case "Customer":
-                $path = "Customer";
-                break;
-            case "Shop":
-                $path = "Shop";
-                break;
-            case "Rider":
-                $path = "Rider";
-                break;
-        }
-        header("location: ../Views/$path/");
+        $this->SyncSession();
     }
 }
