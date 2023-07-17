@@ -1,6 +1,7 @@
 <?php
 require_once '../../Includes/autoload.inc.php';
 $auth = new login();
+$service = new connect_database();
 $auth->CheckAuthorization();
 ?>
 <header class="p-3 mb-3 border-bottom">
@@ -12,10 +13,12 @@ $auth->CheckAuthorization();
           <li><a href="typeshop.php" class="nav-link px-2 link-dark">จัดการประเภทร้านอาหาร</a></li>
         </ul>
 
-<?php //if():?>
         <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+            <?php
+              $image_path = $service->SelectTable("ImageAll","users","Where idAll = {$_SESSION['IdUser_Session']}")->fetch_assoc()['ImageAll'];
+            ?>
+          <img src="<?= $image_path ?>" alt="mdo" width="32" height="32" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="../Shares/editaccount.php">ตั้งค่าบัญชี</a></li>
@@ -23,6 +26,5 @@ $auth->CheckAuthorization();
           </ul>
         </div>
       </div>
-<?php //endif ?>
     </div>
   </header>
