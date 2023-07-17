@@ -15,9 +15,30 @@
             <a href="?Inaction_Get=createmenu" class="btn btn-primary">สร้างรายการอาหาร</a>
         <?php } ?>
         <?php if (isset($_REQUEST['Inaction_Get']) && $_REQUEST['Inaction_Get'] == "createmenu") { ?>
-            <form class="bg-light mt-2 form-control">
-                <div class="input-group">
-                    
+            <form class="bg-light mt-2 form-control pb-3">
+                <div class="row g-2  mt-1">
+                    <div class="col-6">
+                        <label class="form-label">ชื่ออาหาร*</label>
+                        <input class="form-control w-100" type="text" name="" id="">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">ราคาอาหาร*</label><br>
+                        <input class="form-control w-100" type="number" name="" id="">
+                    </div>
+                </div>
+                <div class="row g-2 mt-2">
+                    <div class="col-6">
+                        <label class="form-label">หมวดหมู่อาหาร*</label>
+                        <input class="form-control w-100" type="text" name="" id="">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">รูปภาพอาหาร*</label><br>
+                        <input class="form-control w-100" type="number" name="" id="">
+                    </div>
+                </div>
+                <div class="input-group mt-3">
+                    <a href="index.php" class="btn btn-danger w-50">ยกเลิกเพิ่มเมนูอาหาร</a>
+                    <input class="btn btn-success w-50" type="submit" value="เพิ่มเมนูอาหาร">
                 </div>
             </form>
         <?php } ?>
