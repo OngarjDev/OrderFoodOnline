@@ -75,10 +75,11 @@ class login
     }
     public function Register($request)
     {
+        if($request['IdTypeShop_Post'] == ""){ $request['IdTypeShop_Post'] = "null";}
         $this->DataBase->InsertTable(
             'users',
             'NameAll,PasswordAll,DescriptionShop,AddressCustomer,ImageAll,RoleAll,IdTypeShop',
-            "'{$request['UserName_Post']}','{$request['Password_Post']}','{$request['Description_Post']}','{$request['Address_Post']}','{$request['ImagePath_Post']}','{$request['type_account']}','{$request['IdTypeShop_Post']}'",
+            "'{$request['UserName_Post']}','{$request['Password_Post']}','{$request['Description_Post']}','{$request['Address_Post']}','{$request['ImagePath_Post']}','{$request['type_account']}',{$request['IdTypeShop_Post']}",
             null
         );
         $this->Login($request);

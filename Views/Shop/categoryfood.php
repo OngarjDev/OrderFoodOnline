@@ -9,9 +9,9 @@
 <body>
     <?php include'navbar.layout.php'?>
     <main class="container">
-        <form action="../../Controllers/admin.ctr.php?action_Get=AddTypeShop" method="Post">
+        <form action="../../Controllers/shop.ctr.php?action_Get=AddTypeFood" method="Post">
             <div class="input-group w-50">
-                <input class="form-control" placeholder="หมวดหมู่" type="text" name="NameTypeShop_Post" required>
+                <input class="form-control" placeholder="หมวดหมู่" type="text" name="NameTypeFood_Post" required>
                 <button class="btn btn-primary" type="submit">เพิ่มหมวดหมู่อาหาร</button>
             </div>
         </form>
@@ -27,12 +27,12 @@
                     <?php
                     require_once '../../Includes/autoload.inc.php';
                     $service = new connect_database();
-                    $result = $service->SelectTable(null,"typeshop");
+                    $result = $service->SelectTable(null,"typefood");
                     foreach($result as $row):
                     ?>
                     <tr>
-                        <th scope="row"><?=$row['IdTypeShop']?></th>
-                        <td><?=$row['NameTypeShop']?></td>
+                        <th scope="row"><?=$row['IdTypeFood']?></th>
+                        <td><?=$row['NameTypeFood']?></td>
                     </tr>
                     <?php endforeach ?>
                 </tbody>

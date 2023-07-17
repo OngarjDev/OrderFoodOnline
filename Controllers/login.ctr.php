@@ -37,7 +37,7 @@ class Login_Controller
     }
     private function handleRegister()
     {
-        if (!empty($_FILES['Image']['tmp_name'])) {
+        if (!empty($_FILES['Image_Post']['tmp_name'])) {
         $file = $_FILES['Image_Post'];
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];
@@ -52,7 +52,7 @@ class Login_Controller
         $this->service->Logout();
     }
     private function headerEditAccount(){
-        if (!empty($_FILES['Image']['tmp_name'])) {
+        if (!empty($_FILES['Image_Post']['tmp_name'])) {
         $file = $_FILES['Image_Post'];
         $fileName = $file['name'];
         $fileTmpName = $file['tmp_name'];

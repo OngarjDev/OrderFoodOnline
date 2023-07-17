@@ -15,7 +15,8 @@
       <table class="table text-center table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th scope="col">ไอดี</th>
+            <th>ไอดี</th>
+            <th scope="col">รูปประจำตัว</th>
             <th scope="col">ชื่อผู้ใช้</th>
             <th scope="col">รายละเอียด(ร้านค้า)</th>
             <th scope="col">ที่อยู่(ร้านค้า,ลูกค้า)</th>
@@ -34,6 +35,7 @@
           ?>
             <tr>
               <th scope="row"><?= $row['idAll'] ?></th>
+              <td><img src="<?= $row['ImageAll']?>" class="img-fluid mt-auto mx-auto" width="65"></td>
               <td><?= $row['NameAll'] ?></td>
               <td><?= $row['DescriptionShop'] ?? "-"?></td>
               <td><?= $row['AddressCustomer'] ?? "-"?></td>
