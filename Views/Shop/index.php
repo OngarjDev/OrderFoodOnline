@@ -15,25 +15,34 @@
             <a href="?Inaction_Get=createmenu" class="btn btn-primary">สร้างรายการอาหาร</a>
         <?php } ?>
         <?php if (isset($_REQUEST['Inaction_Get']) && $_REQUEST['Inaction_Get'] == "createmenu") { ?>
-            <form class="bg-light mt-2 form-control pb-3">
+            <form action="../../Controllers/shop.ctr.php?action_Get=AddFood" method="post" enctype="multipart/form-data" class="bg-light mt-2 form-control pb-3">
                 <div class="row g-2  mt-1">
                     <div class="col-6">
                         <label class="form-label">ชื่ออาหาร*</label>
-                        <input class="form-control w-100" type="text" name="" id="">
+                        <input class="form-control w-100" type="text" name="NameFood_Post" id="" required>
                     </div>
                     <div class="col-6">
                         <label class="form-label">ราคาอาหาร*</label><br>
-                        <input class="form-control w-100" type="number" name="" id="">
+                        <input class="form-control w-100" type="number" name="PriceFood_Post" id="" required>
                     </div>
                 </div>
                 <div class="row g-2 mt-2">
                     <div class="col-6">
                         <label class="form-label">หมวดหมู่อาหาร*</label>
-                        <input class="form-control w-100" type="text" name="" id="">
+                        <select class="form-select" name="IdTypeFood_Post" required>
+                            <option value="" selected>เลือกประเภทร้านอาหารของคุณ</option>
+                            <?php
+                            require '../../Includes/autoload.inc.php';
+                            $service = new connect_database();
+                            $result = $service->SelectTable(null, "typefood");
+                            foreach ($result as $row) { ?>
+                                <option value="<?= $row['IdTypeFood'] ?>"><?= $row['NameTypeFood'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="col-6">
                         <label class="form-label">รูปภาพอาหาร*</label><br>
-                        <input class="form-control w-100" type="number" name="" id="">
+                        <input class="form-control w-100" type="file" name="ImageFood_Post" id="" required>
                     </div>
                 </div>
                 <div class="input-group mt-3">
@@ -62,15 +71,15 @@
                     foreach ($result as $row) :
                     ?>
                         <tr>
-                            <th scope="row"><?= $row['idAll'] ?></th>
-                            <td><img src="<?= $row['ImageAll'] ?>" class="img-fluid " width="55"></td>
-                            <td><?= $row['NameAll'] ?></td>
-                            <td><?= $row['RoleAll'] ?></td>
-                            <td><?php echo $service->SelectTable(null, "typeshop", "WHERE IdTypeShop = " . ($row['IdTypeShop'] ?? 0))->fetch_assoc()['NameTypeShop'] ?? "-"; ?></td>
+                            <th scope="row"><?= $row['IdFood'] ?></th>
+                            <td><img src="<?= $row['ImageFood'] ?>" class="img-fluid " width="55"></td>
+                            <td><?= $row['NameFood'] ?></td>
+                            <td><?= $row['PriceFood'] ?></td>
+                            <td><?php echo $service->SelectTable(null, "typefood", "WHERE IdTypeFood = " . ($row['IdTypeFood'] ?? 0))->fetch_assoc()['NameTypeFood'] ?? "-"; ?></td>
                             <td>
                                 <div class="input-group w-100">
                                     <a class="btn btn-primary w-50" href="">แก้ไขเมนูอาหาร</a>
-                                    <a class="btn btn-danger w-50" href="">ลบรายการอาหาร</a>
+                                    <a class="btn btn-danger w-50" href="../../Controllers/shop.ctr.php?action_Get=DeleteFood&IdFood_Get=<?=$row['IdFood']?>">ลบรายการอาหาร</a>
                                 </div>
                             </td>
                         </tr>

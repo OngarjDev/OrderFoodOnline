@@ -13,4 +13,12 @@ class shop
         $this->service->InsertTable("typefood", "NameTypeFood,IdShop", "'{$request['NameTypeFood_Post']}','{$_SESSION['IdUser_Session']}'", null);
         header("location: ../Views/Shop/categoryfood.php?Info_Get=สร้างหมวดหมู่ใหม่เรียบร้อยแล้ว");
     }
+    public function AddFood($request){
+        $this->service->InsertTable("food","IdTypeFood,NameFood,PriceFood,ImageFood,IdShop","{$request['IdTypeFood_Post']},'{$request['NameFood_Post']}',{$request['PriceFood_Post']},'{$request['ImagePath_Post']}',{$_SESSION['IdUser_Session']}",null);
+        header("location: ../Views/Shop/?Info_Get=เพิ่มข้อมูลอาหารสำเร็จ");
+    }
+    public function DeleteFood($request){
+        $this->service->DeleteData("food","IdFood = ". $request['IdFood_Get']);
+        header("location: ../Views/Shop/?Info_Get=ลบข้อมูลอาหารสำเร็จ");
+    }
 }
