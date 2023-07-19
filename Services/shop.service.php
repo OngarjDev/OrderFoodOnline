@@ -22,7 +22,8 @@ class shop
         header("location: ../Views/Shop/?Info_Get=ลบข้อมูลอาหารสำเร็จ");
     }
     public function EditFood($request){
-        $image_path =  $request['ImagePath_Post'] !== "" ?  $request['ImagePath_Post'] : "null";
+        $data_old = $this->service->SelectTable(null, "food", "Where IdFood = " . $request['IdFood_Get'])->fetch_assoc();
+        if(isset($request['ImagePath_Post'])){ $image_path = $request['ImagePath_Post'];}else{$image_path = $data_old['ImageFood'];}
         $this->service->UpdateTable("food",
         "NameFood = '".$request['NameFood_Post']
         ."',PriceFood = '".$request['PriceFood_Post']
