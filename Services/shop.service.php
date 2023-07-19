@@ -21,4 +21,15 @@ class shop
         $this->service->DeleteData("food","IdFood = ". $request['IdFood_Get']);
         header("location: ../Views/Shop/?Info_Get=ลบข้อมูลอาหารสำเร็จ");
     }
+    public function EditFood($request){
+        $image_path =  $request['ImagePath_Post'] !== "" ?  $request['ImagePath_Post'] : "null";
+        $this->service->UpdateTable("food",
+        "NameFood = '".$request['NameFood_Post']
+        ."',PriceFood = '".$request['PriceFood_Post']
+        ."',ImageFood = '".$image_path
+        ."',IdTypeFood = ".$request['IdTypeFood_Post']
+        ,"IdFood = ".$request['IdFood_Get']
+    );
+    header("location: ../Views/Shop/?Info_Get=แก้ไขข้อมูลอาหารสำเร็จ");
+    }
 }

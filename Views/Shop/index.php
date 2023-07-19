@@ -30,7 +30,7 @@
                     <div class="col-6">
                         <label class="form-label">หมวดหมู่อาหาร*</label>
                         <select class="form-select" name="IdTypeFood_Post" required>
-                            <option value="" selected>เลือกประเภทร้านอาหารของคุณ</option>
+                            <option value="" selected>เลือกหมวดหมู่อาหาร</option>
                             <?php
                             require '../../Includes/autoload.inc.php';
                             $service = new connect_database();
@@ -51,6 +51,54 @@
                 </div>
             </form>
         <?php } ?>
+
+
+
+
+        <?php if (isset($_REQUEST['Inaction_Get']) && $_REQUEST['Inaction_Get'] == "editmenu") { 
+            $result = $service->SelectTable(null,"food","Where IdFood = ".$_REQUEST['IdFood_Get'])->fetch_assoc();
+            ?>
+            <form action="../../Controllers/shop.ctr.php?action_Get=EditFood&IdFood_Get=<?= $_REQUEST['IdFood_Get']?>" method="Post" enctype="multipart/form-data" class="bg-light mt-2 form-control pb-3">
+                <div class="row g-2  mt-1">
+                    <div class="col-6">
+                        <label class="form-label">ชื่ออาหาร*</label>
+                        <input class="form-control w-100" type="text" name="NameFood_Post" value="<?= $result['NameFood']?>" id="" required>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">ราคาอาหาร*</label><br>
+                        <input class="form-control w-100" type="number" name="PriceFood_Post" value="<?= $result['PriceFood']?>" id="" required>
+                    </div>
+                </div>
+                <div class="row g-2 mt-2">
+                    <div class="col-6">
+                        <label class="form-label">หมวดหมู่อาหาร*</label>
+                        <select class="form-select" name="IdTypeFood_Post" required>
+                            <?php
+                            require '../../Includes/autoload.inc.php';
+                            $service = new connect_database();
+                            $resulttype = $service->SelectTable(null, "typefood");
+                            foreach ($resulttype as $row) { 
+                                if($result['IdTypeFood'] == $row['IdTypeFood']){?>
+                                <option value="<?= $row['IdTypeFood'] ?>" selected><?= $row['NameTypeFood'] ?></option>
+                                <?php }else{?>
+                                    <option value="<?= $row['IdTypeFood'] ?>"><?= $row['NameTypeFood'] ?></option>
+                                <?php }?>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label">รูปภาพอาหาร</label><br>
+                        <input class="form-control w-100" type="file" name="ImageFood_Post">
+                    </div>
+                </div>
+                <div class="input-group mt-3">
+                    <a href="index.php" class="btn btn-danger w-50">ยกเลิกแก้ไขเมนูอาหาร</a>
+                    <input class="btn btn-success w-50" type="submit" value="แก้ไขเมนูอาหาร">
+                </div>
+            </form>
+        <?php } ?>
+
+        
         <div class="table-responsive">
             <table class="table text-center table-bordered table-striped table-hover mt-3">
                 <thead>
@@ -72,13 +120,13 @@
                     ?>
                         <tr>
                             <th scope="row"><?= $row['IdFood'] ?></th>
-                            <td><img src="<?= $row['ImageFood'] ?>" class="img-fluid " width="55"></td>
+                            <td><img src="<?= $row['ImageFood'] ?>" class="img-fluid " width="100"></td>
                             <td><?= $row['NameFood'] ?></td>
                             <td><?= $row['PriceFood'] ?></td>
                             <td><?php echo $service->SelectTable(null, "typefood", "WHERE IdTypeFood = " . ($row['IdTypeFood'] ?? 0))->fetch_assoc()['NameTypeFood'] ?? "-"; ?></td>
                             <td>
                                 <div class="input-group w-100">
-                                    <a class="btn btn-primary w-50" href="">แก้ไขเมนูอาหาร</a>
+                                    <a class="btn btn-primary w-50" href="?Inaction_Get=editmenu&IdFood_Get=<?=$row['IdFood']?>">แก้ไขเมนูอาหาร</a>
                                     <a class="btn btn-danger w-50" href="../../Controllers/shop.ctr.php?action_Get=DeleteFood&IdFood_Get=<?=$row['IdFood']?>">ลบรายการอาหาร</a>
                                 </div>
                             </td>

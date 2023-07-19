@@ -11,6 +11,7 @@
 <body>
   <?php include 'navbar.layout.php' ?>
   <main>
+    
   </main>
   <?= include '../Shares/footer.layout.php' ?>
 </body>

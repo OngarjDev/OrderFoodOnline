@@ -23,10 +23,14 @@ class Shop_Controller
             case 'DeleteFood':
                 $this->handleDeleteFood();
                 break;
+            case 'EditFood':
+                $this->handleEditFood();
+                break;
             default:
                 header("location: " . $_SERVER['HTTP_REFERER'] . "?Info=" . urlencode("ขออภัยเราไม่พบ Actionในระบบของคุณ"));
         }
     }
+    
     private function handleAddTypeShop()
     {
         $this->shop->AddTypeFood($_REQUEST);
@@ -44,6 +48,16 @@ class Shop_Controller
     }
     private function handleDeleteFood(){
         $this->shop->DeleteFood($_REQUEST);
+    }
+    private function handleEditFood(){
+        if (!empty($_FILES['ImageFood_Post']['tmp_name'])) {
+            $file = $_FILES['ImageFood_Post'];
+            $fileName = $file['name'];
+            $fileTmpName = $file['tmp_name'];
+            $pathImage = $this->manageimage->MoveFile($fileName, $fileTmpName);
+            $_REQUEST['ImagePath_Post'] = $pathImage ?? null;
+        }
+        $this->shop->EditFood($_REQUEST);
     }
 }
 
