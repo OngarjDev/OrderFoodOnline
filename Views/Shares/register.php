@@ -74,7 +74,7 @@
           <?php } ?>
           <div class="row mb-5">
             <div class="col">
-              <a href="index.php" class=" w-100">กลับไปยังหน้าหลัก</a>
+              <a href="../Customer/" class=" w-100">กลับไปยังหน้าหลัก</a>
             </div>
             <div class="col">
               <a href="login.php" class=" w-100">เข้าสู่ระบบ</a>
