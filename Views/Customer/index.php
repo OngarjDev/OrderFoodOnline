@@ -51,11 +51,26 @@
     </div>
 
     <h3 class="text-center">ร้านค้า</h3>
-        <?php
-        $resultshop = $service->SelectTable(null,"users","Where RoleAll = 'Shop'")->fetch_assoc();
-        foreach($resultshop as $rowshop){?>
-          
-        <?php } ?>
+<div class="container">
+  <div class="row">
+    <?php
+    $resultshop = $service->SelectTable(null, "users", "Where RoleAll = 'Shop' AND AccessStatusSCR = 1");
+    foreach ($resultshop as $rowshop) { ?>
+    <div class="col-xl-3">
+        <div class="card" style="width: 18rem;">
+        <div class="text-center mt-5">
+          <img src="<?= $rowshop['ImageAll']?>" class="card-img-top rounded-circle" style="width: 115px;Height: 115px">
+        </div>
+          <div class="card-header">
+            <h5 class="card-title text-center"><?= $rowshop['NameAll']?></h5>
+            <p class="card-text text-center"><?= $rowshop['DescriptionShop']?></p>
+            <a href="" class="btn btn-primary w-100">เยี่ยมชมร้านค้า</a>
+          </div>
+        </div>
+    </div>
+      <?php } ?>
+  </div>
+</div>
   </main>
   <?php include '../Shares/footer.layout.php' ?>
 </body>

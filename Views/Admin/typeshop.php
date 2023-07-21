@@ -41,5 +41,6 @@
             </table>
         </div>
     </main>
+    <?php include '../Shares/footer.layout.php'?>
 </body>
 </html>
