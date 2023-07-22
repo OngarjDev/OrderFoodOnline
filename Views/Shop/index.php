@@ -34,7 +34,7 @@
                             <?php
                             require '../../Includes/autoload.inc.php';
                             $service = new connect_database();
-                            $result = $service->SelectTable(null, "typefood");
+                            $result = $service->SelectTable(null, "typefood","Where IdShop = ".$_SESSION['IdUser_Session']);
                             foreach ($result as $row) { ?>
                                 <option value="<?= $row['IdTypeFood'] ?>"><?= $row['NameTypeFood'] ?></option>
                             <?php } ?>
@@ -76,7 +76,7 @@
                             <?php
                             require '../../Includes/autoload.inc.php';
                             $service = new connect_database();
-                            $resulttype = $service->SelectTable(null, "typefood");
+                            $resulttype = $service->SelectTable(null, "typefood","Where IdShop = ".$_SESSION['IdUser_Session']);
                             foreach ($resulttype as $row) { 
                                 if($result['IdTypeFood'] == $row['IdTypeFood']){?>
                                 <option value="<?= $row['IdTypeFood'] ?>" selected><?= $row['NameTypeFood'] ?></option>
@@ -115,7 +115,7 @@
                     <?php
                     require_once '../../Includes/autoload.inc.php';
                     $service = new connect_database();
-                    $result = $service->SelectTable(null, "food");
+                    $result = $service->SelectTable(null, "food","Where IdShop = ".$_SESSION['IdUser_Session']);
                     foreach ($result as $row) :
                     ?>
                         <tr>

@@ -10,19 +10,19 @@
 
 <body>
     <?php include 'navbar.layout.php' ?>
-    <main class="container g-3">
+    <main class="container">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <?php
             require_once "../../Includes/autoload.inc.php";
             $service = new connect_database();
             $result = $service->SelectTable(null, "food");
             foreach ($result as $row) { ?>
-                <div class="col col-md-9 col-lg-7 col-xl-4">
+                <div class="col col-md-9 col-lg-7 col-xl-4 g-2">
                     <div class="card rounded">
                         <div class="card-body p-4">
                             <div class="d-flex text-black">
                                 <div class="flex-shrink-0 me-2 ">
-                                    <img src="<?= $row['ImageFood'] ?>" alt="Generic placeholder image" class="img-fluid img-fluid" style="width: 185px; border-radius: 10px;">
+                                    <img src="<?= $row['ImageFood'] ?>" alt="Generic placeholder image" class="img-fluid img-fluid" style="width: 120px;Height: 105px; border-radius: 10px;">
                                 </div>
                                 <div class="flex-grow-1 ms-1">
                                     <h5 class="mb-1"><?= $row['NameFood'] ?></h5>
@@ -44,8 +44,8 @@
                             </div>
                         </div>
                         <div class="px-4 pb-4 input-group">
-                            <button type="button" class="btn btn-primary w-50">รายละเอียด</button>
-                            <button type="button" class="btn btn-success w-50">หยิบใส่ตะกร้า</button>
+                            <a href="" type="button" class="btn btn-primary w-50">รายละเอียด</a>
+                            <a href="../../Controllers/customer.php?action_Get=AddCartFood&IdFood=<?=$row['IdFood']?>" class="btn btn-success w-50">หยิบใส่ตะกร้า</a>
                         </div>
                     </div>
                 </div>

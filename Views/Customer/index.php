@@ -19,13 +19,13 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="..." class="d-block w-100" alt="...">
+          <img src="../../Src/Images/BillBoard2.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="..." class="d-block w-100" alt="...">
+          <img src="../../Src/Images/BillBoard1.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="..." class="d-block w-100" alt="...">
+          <img src="../../Src/Images/BillBoard3.jpg" class="d-block w-100" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -38,57 +38,28 @@
       </button>
     </div>
 
-    <h3 class="text-center">หมวดหมู่อาหาร</h3>
-    <div class="text-center">
-      <?php
-      require_once '../../Includes/autoload.inc.php';
-      $service = new connect_database();
-      $result = $service->SelectTable(null, "typefood")->fetch_assoc();
-      foreach ($result as $row) {
-      ?>
-        <a class="badge rounded-pill bg-secondary text-decoration-none" href=""></a>
-      <?php } ?>
-    </div>
-
-    <h3 class="text-center">ร้านค้า</h3>
-<div class="container">
-  <div class="row">
-    <?php
-    $resultshop = $service->SelectTable(null, "users", "Where RoleAll = 'Shop' AND AccessStatusSCR = 1");
-    foreach ($resultshop as $rowshop) { ?>
-    <div class="col-xl-3">
-        <div class="card" style="width: 18rem;">
-        <div class="text-center mt-5">
-          <img src="<?= $rowshop['ImageAll']?>" class="card-img-top rounded-circle" style="width: 115px;Height: 115px">
-        </div>
-          <div class="card-header">
-            <h5 class="card-title text-center"><?= $rowshop['NameAll']?></h5>
-            <p class="card-text text-center"><?= $rowshop['DescriptionShop']?></p>
-            <a href="" class="btn btn-primary w-100">เยี่ยมชมร้านค้า</a>
+    <h2 class="text-center mt-3">ร้านค้า</h2>
+    <div class="container">
+      <div class="row">
+        <?php
+        $resultshop = $service->SelectTable(null, "users", "Where RoleAll = 'Shop' AND AccessStatusSCR = 1");
+        foreach ($resultshop as $rowshop) { ?>
+          <div class="col-xl-3">
+            <div class="card" style="width: 18rem;">
+              <div class="text-center mt-3">
+                <img src="<?= $rowshop['ImageAll'] ?>" class="card-img-top rounded-circle mb-3" style="width: 115px;Height: 115px">
+              </div>
+              <div class="card-header">
+                <h5 class="card-title text-center"><?= $rowshop['NameAll'] ?></h5>
+                <p class="card-text text-center d-inline-block text-truncate" style="max-width: 250px;"><?= $rowshop['DescriptionShop'] ?></p>
+                <a href="shop.php?IdShop_Get=<?= $rowshop['idAll']?>" class="btn btn-primary w-100">เยี่ยมชมร้านค้า</a>
+              </div>
+            </div>
           </div>
-        </div>
+        <?php } ?>
+      </div>
     </div>
-      <?php } ?>
-  </div>
-</div>
   </main>
   <?php include '../Shares/footer.layout.php' ?>
 </body>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php include '../Shares/header.layout.php' ?>
-  <title>หน้าหลัก</title>
-</head>
-
-<body>
-  <?php include 'navbar.layout.php' ?>
-  <main>
-  </main>
-  <?= include '../Shares/footer.layout.php' ?>
-</body>
-
 </html>

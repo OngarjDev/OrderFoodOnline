@@ -27,7 +27,7 @@
                     <?php
                     require_once '../../Includes/autoload.inc.php';
                     $service = new connect_database();
-                    $result = $service->SelectTable(null,"typefood");
+                    $result = $service->SelectTable(null,"typefood","Where IdShop = ".$_SESSION['IdUser_Session']);
                     foreach($result as $row):
                     ?>
                     <tr>
