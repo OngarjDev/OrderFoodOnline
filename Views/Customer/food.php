@@ -44,8 +44,12 @@
                             </div>
                         </div>
                         <div class="px-4 pb-4 input-group">
-                            <a href="" type="button" class="btn btn-primary w-50">รายละเอียด</a>
-                            <a href="../../Controllers/customer.php?action_Get=AddCartFood&IdFood=<?=$row['IdFood']?>" class="btn btn-success w-50">หยิบใส่ตะกร้า</a>
+                            <a href="fooddetail.php?IdFood_Get=<?= $row['IdFood']?>" type="button" class="btn btn-primary w-50">รายละเอียด</a>
+                            <?php if(isset($_SESSION['IdUser_Session'])){?>
+                            <a href="../../Controllers/customer.php?action_Get=AddCartFood&IdFood_Get=<?=$row['IdFood']?>" class="btn btn-success w-50">หยิบใส่ตะกร้า</a>
+                        <?php }else{ ?>
+                            <a href="../Shares/login.php" class="btn btn-danger w-50">โปรดเข้าสู่ระบบ</a>
+                            <?php }?>
                         </div>
                     </div>
                 </div>

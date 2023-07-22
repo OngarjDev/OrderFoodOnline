@@ -36,7 +36,7 @@ $shopinfo = $service->SelectTable(null, "users", "Where IdAll = " . $_REQUEST['I
             <?php } ?>
             </div>
 
-            <div class="container">
+            <div class="container mb-3">
                 <div class="row">
                     <h2 class="text-center mt-3">อาหารในรายการ</h2>
                     <?php

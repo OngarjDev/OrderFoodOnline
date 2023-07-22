@@ -42,6 +42,8 @@
     <div class="container">
       <div class="row">
         <?php
+        require_once "../../Includes/autoload.inc.php";
+        $service = new connect_database();
         $resultshop = $service->SelectTable(null, "users", "Where RoleAll = 'Shop' AND AccessStatusSCR = 1");
         foreach ($resultshop as $rowshop) { ?>
           <div class="col-xl-3">

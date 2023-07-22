@@ -71,7 +71,7 @@ class login
     public function Logout()
     {
         session_destroy();
-        header('location: ../Views/Shares/Login.php?Info_Get=ออกระบบเรียบร้อย');
+        header('location: ../Views/Customer/?Info_Get=ออกระบบเรียบร้อย');
     }
     public function Register($request)
     {
