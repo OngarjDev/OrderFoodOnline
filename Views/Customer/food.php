@@ -22,7 +22,7 @@
                         <div class="card-body p-4">
                             <div class="d-flex text-black">
                                 <div class="flex-shrink-0 me-2 ">
-                                    <img src="<?= $row['ImageFood'] ?>" alt="Generic placeholder image" class="img-fluid img-fluid" style="width: 120px;Height: 105px; border-radius: 10px;">
+                                    <img src="<?= $row['ImageFood'] ?>" alt="Generic placeholder image" class="img-fluid img-fluid" style="width: 140px;Height: 105px; border-radius: 10px;">
                                 </div>
                                 <div class="flex-grow-1 ms-1">
                                     <h5 class="mb-1"><?= $row['NameFood'] ?></h5>

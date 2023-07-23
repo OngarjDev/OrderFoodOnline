@@ -26,11 +26,16 @@ class Shop_Controller
             case 'EditFood':
                 $this->handleEditFood();
                 break;
+            case 'AddDiscount':
+                $this->handleDiscount();
+                break;
             default:
                 header("location: " . $_SERVER['HTTP_REFERER'] . "?Info=" . urlencode("ขออภัยเราไม่พบ Actionในระบบของคุณ"));
         }
     }
-    
+    private function handleDiscount(){
+        $this->shop->AddDiscount($_REQUEST);
+    }
     private function handleAddTypeShop()
     {
         $this->shop->AddTypeFood($_REQUEST);
@@ -46,10 +51,12 @@ class Shop_Controller
         }
         $this->shop->AddFood($_REQUEST);
     }
-    private function handleDeleteFood(){
+    private function handleDeleteFood()
+    {
         $this->shop->DeleteFood($_REQUEST);
     }
-    private function handleEditFood(){
+    private function handleEditFood()
+    {
         if (!empty($_FILES['ImageFood_Post']['tmp_name'])) {
             $file = $_FILES['ImageFood_Post'];
             $fileName = $file['name'];

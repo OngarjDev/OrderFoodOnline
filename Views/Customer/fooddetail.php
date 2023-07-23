@@ -63,7 +63,11 @@ $foodinfo = $service->SelectTable(null, "food", "Where IdFood = {$_REQUEST['IdFo
                     <form class="form-control" action="../../Controllers/customer.ctr.php?action_Get=Comment&IdFood_Get=<?= $_REQUEST['IdFood_Get'] ?>" method="Post">
                         <label class="label-control">บอกความรู้สึกของคุณ</label>
                         <input class="form-control" type="text" name="Comment_Post" id="">
-                        <input class="btn btn-primary w-100 mt-2" type="submit" value="แสดงความคิดเห็น">
+                        <?php if (isset($_SESSION['IdUser_Session'])) { ?>
+                            <input class="btn btn-primary w-100 mt-2" type="submit" value="แสดงความคิดเห็น">
+                        <?php } else { ?>
+                            <a href="../Shares/login.php" class="btn btn-danger w-100 mt-2">โปรดเข้าสู่ระบบ</a>
+                        <?php } ?>
                     </form>
                 </div>
                 <h2 class="text-center mt-3">ความคิดเห็น</h2>
