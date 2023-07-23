@@ -34,7 +34,19 @@ $foodinfo = $service->SelectTable(null, "food", "Where IdFood = {$_REQUEST['IdFo
                             <?php } ?>
                         </div>
                     </div>
-                    <a class="btn btn-success mt-3 w-100">เพิ่มลงในตะกร้าสินค้า</a>
+                    <div class="mt-3">
+                        <?php
+                        $customer = new customer();
+                        if (isset($_SESSION['IdUser_Session'])) {
+                            if ($customer->CheckItem($_REQUEST['IdFood_Get'])) { ?>
+                                <a class="btn btn-danger w-100" disabled>ถูกเพิ่มลงในตะกร้าแล้ว</a>
+                            <?php } else { ?>
+                                <a href="../../Controllers/customer.ctr.php?action_Get=AddCartFood&IdFood_Get=<?= $row['IdFood'] ?>" class="btn btn-success w-100">หยิบใส่ตะกร้า</a>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <a href="../Shares/login.php" class="btn btn-danger w-100">โปรดเข้าสู่ระบบ</a>
+                        <?php } ?>
+                    </div>
                 </div>
                 <h3 class="mt-3">เมนูจากร้าน</h3>
                 <?php $shopinfo = $service->SelectTable(null, "users", "Where idAll = " . $foodinfo['IdShop'])->fetch_assoc(); ?>
@@ -42,13 +54,13 @@ $foodinfo = $service->SelectTable(null, "food", "Where IdFood = {$_REQUEST['IdFo
                 <?php
                 $result = $service->SelectTable(null, "typefood", "Where IdShop = " . $shopinfo['idAll']);
                 foreach ($result as $row) { ?>
-                    <a class="badge rounded-pill bg-secondary text-decoration-none g-1 mt-0" href="shop.php?IdTypeFood_Get=<?=$row['IdTypeFood']?>&IdShop_Get=<?=$row['IdShop']?>"><?= $row['NameTypeFood'] ?></a>
+                    <a class="badge rounded-pill bg-secondary text-decoration-none g-1 mt-0" href="shop.php?IdTypeFood_Get=<?= $row['IdTypeFood'] ?>&IdShop_Get=<?= $row['IdShop'] ?>"><?= $row['NameTypeFood'] ?></a>
                 <?php } ?>
 
             </div>
             <div class="col-xl-3">
                 <div class="bg-light">
-                    <form class="form-control" action="../../Controllers/customer.ctr.php?action_Get=Comment&IdFood_Get=<?=$_REQUEST['IdFood_Get'] ?>" method="Post">
+                    <form class="form-control" action="../../Controllers/customer.ctr.php?action_Get=Comment&IdFood_Get=<?= $_REQUEST['IdFood_Get'] ?>" method="Post">
                         <label class="label-control">บอกความรู้สึกของคุณ</label>
                         <input class="form-control" type="text" name="Comment_Post" id="">
                         <input class="btn btn-primary w-100 mt-2" type="submit" value="แสดงความคิดเห็น">
@@ -56,11 +68,11 @@ $foodinfo = $service->SelectTable(null, "food", "Where IdFood = {$_REQUEST['IdFo
                 </div>
                 <h2 class="text-center mt-3">ความคิดเห็น</h2>
                 <?php
-                $resultComment = $service->InnerJoin("review","users","review.IdUser = users.idAll","Where review.IdFood = {$foodinfo['IdFood']}");
+                $resultComment = $service->InnerJoin("review", "users", "review.IdUser = users.idAll", "Where review.IdFood = {$foodinfo['IdFood']}");
                 foreach ($resultComment as $rowComment) { ?>
                     <div class="mt-2 bg-light p-3 border rounded-3">
-                        ชื่อผู้ใช้: <?=$rowComment['NameAll']?><br>
-                        ความคิดเห็น: <?=$rowComment['Comment']?>
+                        ชื่อผู้ใช้: <?= $rowComment['NameAll'] ?><br>
+                        ความคิดเห็น: <?= $rowComment['Comment'] ?>
                     </div>
                 <?php } ?>
             </div>
