@@ -3,15 +3,28 @@ require_once '../Includes/autoload.inc.php';
 
 class Customer_Controller
 {
+    protected $customer;
+
+    public function __construct()
+    {
+        $this->customer = new customer();
+    }
+
     public function handleRequest()
     {
         switch ($_REQUEST['action_Get']) {
             case 'AddCartFood':
                 $this->AddCartFood();
                 break;
+            case 'Comment':
+                $this->Comment();
+                break;
             default:
                 header("location: " . $_SERVER['HTTP_REFERER'] . "?Info=" . urlencode("ขออภัยเราไม่พบ Actionในระบบของคุณ"));
         }
+    }
+    private function Comment(){
+        $this->customer->Comment($_REQUEST);
     }
     private function AddCartFood()
     {
@@ -24,8 +37,8 @@ class Customer_Controller
         }
 
         // ตรวจสอบว่ามีรายการสินค้าที่ต้องการเพิ่มในตะกร้าหรือยัง
-        $idFoodToAdd = $_REQUEST['IdFood']; // เช่น สมมติว่าต้องการเพิ่ม IdFood 4 ลงในตะกร้า
-        $amountToAdd = $_REQUEST['Amount']; // เช่น สมมติว่าต้องการเพิ่ม 2 ชิ้น
+        $idFoodToAdd = $_REQUEST['IdFood_Get']; // เช่น สมมติว่าต้องการเพิ่ม IdFood 4 ลงในตะกร้า
+        $amountToAdd = $_REQUEST['Amount_Get']; // เช่น สมมติว่าต้องการเพิ่ม 2 ชิ้น
 
         $foundIndex = -1; // ตัวแปรเก็บ index ของรายการสินค้าที่ต้องการเพิ่ม ถ้าไม่เจอให้เป็น -1
 
@@ -42,14 +55,14 @@ class Customer_Controller
             $existingCartData[$foundIndex]['amount'] += $amountToAdd;
         } else {
             // ถ้ายังไม่เจอให้เพิ่มรายการสินค้าใหม่ลงในตะกร้า
-            $newItem = ['IdFood' => $idFoodToAdd, 'amount' => $amountToAdd];
-            $existingCartData[] = $newItem ?? 0;
+            $newItem = ['IdFood' => $idFoodToAdd, 'amount' => $amountToAdd ?? 0];
+            $existingCartData[] = $newItem;
         }
 
         // ทำการ serialized ข้อมูลและเก็บใน cookie
         $serializedCartData = serialize($existingCartData);
-        setcookie('cart', $serializedCartData);
-        header('location: '.$_SERVER['HTTP_REFERER']);
+        setcookie('cart', $serializedCartData,time() + 10000, '/');
+        header('location: ' . $_SERVER['HTTP_REFERER']);
     }
 }
 

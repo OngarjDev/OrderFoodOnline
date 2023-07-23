@@ -33,7 +33,7 @@
                                     <div class="d-flex justify-content-start rounded-3 px-2  " style="background-color: #efefef;">
                                         <div class="px-4">
                                             <p class="small text-muted mb-1">ราคา</p>
-                                            <p class="mb-0"><?= $row['PriceFood']?></p>
+                                            <p class="mb-0"><?= $row['PriceFood'] ?></p>
                                         </div>
                                         <div>
                                             <p class="small text-muted mb-1">คำติชม</p>
@@ -44,12 +44,17 @@
                             </div>
                         </div>
                         <div class="px-4 pb-4 input-group">
-                            <a href="fooddetail.php?IdFood_Get=<?= $row['IdFood']?>" type="button" class="btn btn-primary w-50">รายละเอียด</a>
-                            <?php if(isset($_SESSION['IdUser_Session'])){?>
-                            <a href="../../Controllers/customer.php?action_Get=AddCartFood&IdFood_Get=<?=$row['IdFood']?>" class="btn btn-success w-50">หยิบใส่ตะกร้า</a>
-                        <?php }else{ ?>
-                            <a href="../Shares/login.php" class="btn btn-danger w-50">โปรดเข้าสู่ระบบ</a>
-                            <?php }?>
+                            <a href="fooddetail.php?IdFood_Get=<?= $row['IdFood'] ?>" type="button" class="btn btn-primary w-50">รายละเอียด</a>
+                            <?php $customer = new customer();
+                            if (isset($_SESSION['IdUser_Session'])) {
+                                if ($customer->CheckItem($row['IdFood'])) { ?>
+                                    <a class="btn btn-danger w-50" disabled>ถูกเพิ่มลงในตะกร้าแล้ว</a>
+                                <?php } else { ?>
+                                    <a href="../../Controllers/customer.ctr.php?action_Get=AddCartFood&IdFood_Get=<?=$row['IdFood'] ?>" class="btn btn-success w-50">หยิบใส่ตะกร้า</a>
+                                <?php } ?>
+                            <?php } else { ?>
+                                <a href="../Shares/login.php" class="btn btn-danger w-50">โปรดเข้าสู่ระบบ</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

@@ -72,8 +72,17 @@ public function SelectTable(?string $colname = null, string $TableName = "",?str
         $sql = "DELETE FROM " . $TableName . " WHERE " . $Where;
         return $this->ObjConnect->query($sql);
     }
-    // public function InnerJoin(){
-    //     $sql = "INNER JOIN"
-    // }
+    /**
+     * เชื่อม หลายๆ Table เข้าด้วยกัน ในครั้งเดียว
+     * @param $TableName1 ข้อมูลTable ชุดแรก
+     * @param $TableName2 ข้อมูลTable ชุดสอง
+     * @param $likeJoin สิ่งที่ทั้ง 2 Table มีเหมือนกัน เพื่อให้รับรู้ถึงเจ้าของข้อมูลนั้นๆ
+     * @param $sqlcustom เพิ่มคำสั่ง Sql เพิ่มเติม
+     * ตัวอย่างการส่ง Table1.IdUser = Table2.IdUser
+     */
+    public function InnerJoin(string $TableName1,string $TableName2,string $likeJoin,string $sqlcustom){
+        $sql = "SELECT * FROM  $TableName1 INNER JOIN $TableName2 ON $likeJoin $sqlcustom";
+        return $this->ObjConnect->query($sql);
+    }
 }
 ?>

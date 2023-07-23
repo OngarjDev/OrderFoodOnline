@@ -11,7 +11,7 @@
 <body class="container">
     <?php include 'navbar.layout.php' ?>
     <div class="my-3 p-3 bg-body rounded shadow-sm">
-        <h6 class="border-bottom pb-2 mb-0">ค้นหาร้านค้า</h6>
+        <h6 class="border-bottom pb-2 mb-0">ค้นหาร้านค้า(<?=$_REQUEST['Keyword_Get']?>)</h6>
         <table class="table table-bordered mt-3 text-center">
             <thead>
                 <tr>
