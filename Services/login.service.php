@@ -76,6 +76,7 @@ class login
     public function Register($request)
     {
         if($request['IdTypeShop_Post'] == ""){ $request['IdTypeShop_Post'] = "null";}
+        if($request['ImagePath_Post'] == ""){ $request['ImagePath_Post'] = "../../Src/Images/Unknown.png";}
         $this->DataBase->InsertTable(
             'users',
             'NameAll,PasswordAll,DescriptionShop,AddressCustomer,ImageAll,RoleAll,IdTypeShop',

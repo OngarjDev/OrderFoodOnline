@@ -19,7 +19,7 @@ class data_input
         $this->formInputs->Customer = [
             (object) ['label' => 'ชื่อผู้ใช้*', 'name' => 'UserName_Post', 'type' => 'text', 'placeholder' => 'กรอกชื่อผู้ใช้ของคุณ', 'required' => true],
             (object) ['label' => 'รหัสผ่าน*', 'name' => 'Password_Post', 'type' => 'password', 'placeholder' => 'กรอกรหัสผ่านขั้นต่ำ 8ตัว', 'required' => true],
-            (object) ['label' => 'ที่อยู่(ที่สามารถรับสินค้าได้)*', 'name' => 'Address_Post', 'type' => 'textarea', 'placeholder' => 'กรอกที่อยู่ของคุณสำหรับจัดส่งสินค้า', 'required' => true],
+            (object) ['label' => 'ที่อยู่(ที่สามารถรับสินค้าได้)', 'name' => 'Address_Post', 'type' => 'textarea', 'placeholder' => 'กรอกที่อยู่ของคุณสำหรับจัดส่งสินค้า', 'required' => true],
             (object) ['label' => 'โปรไฟล์', 'name' => 'Image_Post', 'type' => 'file', 'required' => false],
         ];
 
