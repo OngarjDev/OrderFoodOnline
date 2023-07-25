@@ -39,13 +39,15 @@ $shopinfo = $service->SelectTable(null, "users", "Where IdAll = " . $_REQUEST['I
         <div class="container mb-3">
             <div class="row">
                 <h2 class="text-center mt-3">อาหารในรายการ</h2>
-                <?php
-                if (isset($_REQUEST['IdTypeFood_Get'])) {
+                <?php if (isset($_REQUEST['IdTypeFood_Get'])) {
                     $resultfood = $service->SelectTable(null, "food", "Where IdShop = {$shopinfo['idAll']} AND IdTypeFood = {$_REQUEST['IdTypeFood_Get']}");
                 } else {
                     $resultfood = $service->SelectTable(null, "food", "Where IdShop = {$shopinfo['idAll']}");
                 }
-                foreach ($resultfood as $row) { ?>
+                require_once "../../Includes/autoload.inc.php";
+                $service = new connect_database();
+                $result = $service->SelectTable(null, "food");
+                foreach ($result as $row) { ?>
                     <div class="col col-md-9 col-lg-7 col-xl-4 g-2">
                         <div class="card rounded">
                             <div class="card-body p-4">
@@ -59,21 +61,23 @@ $shopinfo = $service->SelectTable(null, "users", "Where IdAll = " . $_REQUEST['I
                                         $NameShop = $service->SelectTable(null, "users", "Where idAll = " . $row['IdShop'])->fetch_assoc()['NameAll'];
                                         ?>
                                         <p class="mb-0">ชื่อร้านค้า: <?= $NameShop ?></p>
-                                        <div class="d-flex justify-content-start rounded-3 px-2  " style="background-color: #efefef;">
+                                        <div class="d-flex justify-content-start rounded-3 px-4  " style="background-color: #efefef;">
+                                            <div>
+                                                <p class="small text-muted mb-1">ส่วนลด</p>
+                                                <?php
+                                                $promotion = $service->SelectTable(null, "promotion", "Where IdShop = " . $row['IdShop'])->fetch_assoc()['PersenPromotion'] ?? 0 ?>
+                                                <p class="mb-0"><?= $promotion ?>%</p>
+                                            </div>
                                             <div class="px-4">
                                                 <p class="small text-muted mb-1">ราคา</p>
                                                 <p class="mb-0"><?= $row['PriceFood'] ?></p>
-                                            </div>
-                                            <div>
-                                                <p class="small text-muted mb-1">คำติชม</p>
-                                                <p class="mb-0"></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="px-4 pb-4 input-group">
-                                <a href="" type="button" class="btn btn-primary w-50">รายละเอียด</a>
+                                <a href="fooddetail.php?IdFood_Get=<?= $row['IdFood'] ?>" type="button" class="btn btn-primary w-50">รายละเอียด</a>
                                 <?php $customer = new customer();
                                 if (isset($_SESSION['IdUser_Session'])) {
                                     if ($customer->CheckItem($row['IdFood'])) { ?>

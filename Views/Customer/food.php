@@ -15,7 +15,7 @@
             <?php
             require_once "../../Includes/autoload.inc.php";
             $service = new connect_database();
-            $result = $service->SelectTable(null, "food");
+            $result = $service->SelectTable(null,"food");
             foreach ($result as $row) { ?>
                 <div class="col col-md-9 col-lg-7 col-xl-4 g-2">
                     <div class="card rounded">
@@ -30,14 +30,16 @@
                                     $NameShop = $service->SelectTable(null, "users", "Where idAll = " . $row['IdShop'])->fetch_assoc()['NameAll'];
                                     ?>
                                     <p class="mb-0">ชื่อร้านค้า: <?= $NameShop ?></p>
-                                    <div class="d-flex justify-content-start rounded-3 px-2  " style="background-color: #efefef;">
+                                    <div class="d-flex justify-content-start rounded-3 px-4  " style="background-color: #efefef;">
+                                        <div>
+                                            <p class="small text-muted mb-1">ส่วนลด</p>
+                                            <?php 
+                                            $promotion = $service->SelectTable(null,"promotion","Where IdShop = ". $row['IdShop'])->fetch_assoc()['PersenPromotion']??0?>
+                                            <p class="mb-0"><?=$promotion?>%</p>
+                                        </div>
                                         <div class="px-4">
                                             <p class="small text-muted mb-1">ราคา</p>
                                             <p class="mb-0"><?= $row['PriceFood'] ?></p>
-                                        </div>
-                                        <div>
-                                            <p class="small text-muted mb-1">คำติชม</p>
-                                            <p class="mb-0"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +52,7 @@
                                 if ($customer->CheckItem($row['IdFood'])) { ?>
                                     <a class="btn btn-danger w-50" disabled>ถูกเพิ่มลงในตะกร้าแล้ว</a>
                                 <?php } else { ?>
-                                    <a href="../../Controllers/customer.ctr.php?action_Get=AddCartFood&IdFood_Get=<?=$row['IdFood'] ?>" class="btn btn-success w-50">หยิบใส่ตะกร้า</a>
+                                    <a href="../../Controllers/customer.ctr.php?action_Get=AddCartFood&IdFood_Get=<?= $row['IdFood'] ?>" class="btn btn-success w-50">หยิบใส่ตะกร้า</a>
                                 <?php } ?>
                             <?php } else { ?>
                                 <a href="../Shares/login.php" class="btn btn-danger w-50">โปรดเข้าสู่ระบบ</a>

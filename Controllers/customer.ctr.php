@@ -4,10 +4,11 @@ require_once '../Includes/autoload.inc.php';
 class Customer_Controller
 {
     protected $customer;
-
+    protected $service;
     public function __construct()
     {
         $this->customer = new customer();
+        $this->service = new connect_database();
     }
 
     public function handleRequest()
@@ -19,18 +20,35 @@ class Customer_Controller
             case 'Comment':
                 $this->Comment();
                 break;
+            case 'UpdateAmountCart':
+                $this->UpdateAmountCart();
+                break;
+            case 'AddOrder':
+                $this->customer->AddOrder($_REQUEST);
+                break;
             default:
                 header("location: " . $_SERVER['HTTP_REFERER'] . "?Info=" . urlencode("ขออภัยเราไม่พบ Actionในระบบของคุณ"));
         }
     }
-    private function Comment(){
+    private function UpdateAmountCart()
+    {
+        $existingCartData = json_decode($_COOKIE['cart'], true);
+        $foundIndex = array_search($_REQUEST['IdFood_Get'], array_column($existingCartData, 'IdFood'));
+
+        $existingCartData[$foundIndex]['amount'] = $_REQUEST['Amount'] ?? 1;
+        $jsonCartData = json_encode($existingCartData);
+        setcookie('cart', $jsonCartData, time() + 90000, '/');
+        header('location: ' . $_SERVER['HTTP_REFERER']);
+    }
+    private function Comment()
+    {
         $this->customer->Comment($_REQUEST);
     }
     private function AddCartFood()
     {
         if (isset($_COOKIE['cart'])) {
             // ถ้ามีให้ดึงข้อมูลจาก cookie และแปลงคืนเป็น array ด้วย unserialize
-            $existingCartData = unserialize($_COOKIE['cart']);
+            $existingCartData = json_decode($_COOKIE['cart'], true);
         } else {
             // ถ้ายังไม่มีให้กำหนดให้เป็น array ว่าง
             $existingCartData = [];
@@ -55,13 +73,13 @@ class Customer_Controller
             $existingCartData[$foundIndex]['amount'] += $amountToAdd;
         } else {
             // ถ้ายังไม่เจอให้เพิ่มรายการสินค้าใหม่ลงในตะกร้า
-            $newItem = ['IdFood' => $idFoodToAdd, 'amount' => $amountToAdd ?? 0];
+            $newItem = ['IdFood' => $idFoodToAdd, 'amount' => $amountToAdd ?? 1];
             $existingCartData[] = $newItem;
         }
 
         // ทำการ serialized ข้อมูลและเก็บใน cookie
-        $serializedCartData = serialize($existingCartData);
-        setcookie('cart', $serializedCartData,time() + 10000, '/');
+        $jsonCartData = json_encode($existingCartData);
+        setcookie('cart', $jsonCartData, time() + 10000, '/');
         header('location: ' . $_SERVER['HTTP_REFERER']);
     }
 }

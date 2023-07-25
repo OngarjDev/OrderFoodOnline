@@ -41,7 +41,7 @@ $foodinfo = $service->SelectTable(null, "food", "Where IdFood = {$_REQUEST['IdFo
                             if ($customer->CheckItem($_REQUEST['IdFood_Get'])) { ?>
                                 <a class="btn btn-danger w-100" disabled>ถูกเพิ่มลงในตะกร้าแล้ว</a>
                             <?php } else { ?>
-                                <a href="../../Controllers/customer.ctr.php?action_Get=AddCartFood&IdFood_Get=<?= $row['IdFood'] ?>" class="btn btn-success w-100">หยิบใส่ตะกร้า</a>
+                                <a href="../../Controllers/customer.ctr.php?action_Get=AddCartFood&IdFood_Get=<?= $foodinfo['IdFood'] ?>" class="btn btn-success w-100">หยิบใส่ตะกร้า</a>
                             <?php } ?>
                         <?php } else { ?>
                             <a href="../Shares/login.php" class="btn btn-danger w-100">โปรดเข้าสู่ระบบ</a>

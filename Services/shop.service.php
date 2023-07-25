@@ -34,7 +34,11 @@ class shop
     header("location: ../Views/Shop/?Info_Get=แก้ไขข้อมูลอาหารสำเร็จ");
     }
     public function AddDiscount($request){
-        $this->service->InsertTable("promotion","CodePromotion,PersenPromotion,IdShop","'{$request['Code_Post']}','{$request['Persent_Post']}',{$_SESSION['IdUser_Session']}",null);
-    header('location: ../Views/Shop/manageshop.php?Info_Get=สร้างส่วนลดสำเร็จ');
+        $this->service->InsertTable("promotion","PersenPromotion,IdShop","'{$request['Persent_Post']}',{$_SESSION['IdUser_Session']}",null);
+        header('location: ../Views/Shop/manageshop.php?Info_Get=สร้างส่วนลดสำเร็จ');
+    }
+    public function DeleteDiscount($request){
+        $this->service->DeleteData("promotion","IdShop = {$request['IdShop_Get']}");
+        header('location: ../Views/Shop/manageshop.php?Info_Get=ลบส่วนลดสำเร็จ');
     }
 }

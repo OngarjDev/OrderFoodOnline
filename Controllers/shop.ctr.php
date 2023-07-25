@@ -15,30 +15,26 @@ class Shop_Controller
     {
         switch ($_REQUEST['action_Get']) {
             case 'AddTypeFood':
-                $this->handleAddTypeShop();
+                $this->shop->AddTypeFood($_REQUEST);
                 break;
             case 'AddFood':
                 $this->handleAddFood();
                 break;
             case 'DeleteFood':
-                $this->handleDeleteFood();
+                $this->shop->DeleteFood($_REQUEST);
                 break;
             case 'EditFood':
                 $this->handleEditFood();
                 break;
             case 'AddDiscount':
-                $this->handleDiscount();
+                $this->shop->AddDiscount($_REQUEST);
+                break;
+            case 'DeleteDiscount':
+                $this->shop->DeleteDiscount($_REQUEST);
                 break;
             default:
                 header("location: " . $_SERVER['HTTP_REFERER'] . "?Info=" . urlencode("ขออภัยเราไม่พบ Actionในระบบของคุณ"));
         }
-    }
-    private function handleDiscount(){
-        $this->shop->AddDiscount($_REQUEST);
-    }
-    private function handleAddTypeShop()
-    {
-        $this->shop->AddTypeFood($_REQUEST);
     }
     private function handleAddFood()
     {
@@ -50,10 +46,6 @@ class Shop_Controller
             $_REQUEST['ImagePath_Post'] = $pathImage ?? null;
         }
         $this->shop->AddFood($_REQUEST);
-    }
-    private function handleDeleteFood()
-    {
-        $this->shop->DeleteFood($_REQUEST);
     }
     private function handleEditFood()
     {

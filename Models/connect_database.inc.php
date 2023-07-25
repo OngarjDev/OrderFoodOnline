@@ -80,7 +80,7 @@ public function SelectTable(?string $colname = null, string $TableName = "",?str
      * @param $sqlcustom เพิ่มคำสั่ง Sql เพิ่มเติม
      * ตัวอย่างการส่ง Table1.IdUser = Table2.IdUser
      */
-    public function InnerJoin(string $TableName1,string $TableName2,string $likeJoin,string $sqlcustom){
+    public function InnerJoin(string $TableName1,string $TableName2,string $likeJoin,?string $sqlcustom){
         $sql = "SELECT * FROM  $TableName1 INNER JOIN $TableName2 ON $likeJoin $sqlcustom";
         return $this->ObjConnect->query($sql);
     }

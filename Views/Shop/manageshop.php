@@ -14,23 +14,21 @@
     <div class="p-3 rounded-3 bg-light">
       <a class="btn btn-primary w-100" href="../Shares/sales_report.pdf.php">สรุปยอดขายวันนี้</a>
     </div>
-    <form class="form-control mt-2" action="../../Controllers/shop.ctr.php?action_Get=AddDiscount" method="Post">
-      <label class="label-control">รหัสโค้ดส่วนลด</label>
-      <input class="form-control" type="text" name="Code_Post" id="">
-      <label class="label-control">เปอร์เซนต์ที่จะลดราคา</label>
-      <input class="form-control" type="number" name="Persent_Post" min="2" max="100" id="">
-      <input class="btn btn-primary w-100 mt-2" type="submit" value="สร้างโค้ดส่วนลด">
-    </form>
-    <div class="p-3 rounded-3 bg-light mt-2">
-        <?php
-        $service = new connect_database();
-        $result = $service->SelectTable(null,"promotion");
-        foreach($result as $row){?>
-        รหัสส่วนลด: <?=$row['CodePromotion']?>
-        เปอร์เซ็นต์ที่ถูกลด: <?=$row['PersenPromotion']?>
-        <hr>
-        <?php }?>
-    </div>
+    <?php
+    $service = new connect_database();
+    $result = $service->SelectTable(null, "promotion")->fetch_assoc()['PersenPromotion']??null;
+    if (!isset($result)) { ?>
+      <form class="form-control mt-2" action="../../Controllers/shop.ctr.php?action_Get=AddDiscount" method="Post">
+        <label class="label-control">เปอร์เซนต์ที่จะลดราคา</label>
+        <input class="form-control" type="number" name="Persent_Post" min="2" max="100" id="">
+        <input class="btn btn-primary w-100 mt-2" type="submit" value="สร้างโค้ดส่วนลด">
+      </form>
+    <?php } else { ?>
+      <div class="p-3 rounded-3 bg-light mt-2">
+      <h2 class="text-center">ส่วนลดร้านค้า</h2>
+        ส่วนลดราคาอาหาร: <?= $result ?>% ของราคาอาหาร <a class="text-danger" href="../../Controllers/shop.ctr.php?action_Get=DeleteDiscount&IdShop_Get=<?= $_SESSION['IdUser_Session']?>">ลบส่วนลด</a>
+      </div>
+    <?php } ?>
   </main>
   <?php include '../Shares/footer.layout.php' ?>
 </body>
