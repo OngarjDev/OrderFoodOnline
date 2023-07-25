@@ -44,6 +44,7 @@ class customer{
         // ทำการ serialized ข้อมูลและเก็บใน cookie
         $jsonCartData = json_encode($existingCartData);
         $this->service->InsertTable("orders","IdCustomer,FoodOrder,PriceOrder,StatusOrder,DateOrder","'{$_SESSION['IdUser_Session']}','$jsonCartData',$sum,0,'$currentDate'",null);
+        setcookie('cart', '', 0, '/');
         header('location: ../Views/Customer/order.php?Info_Get=รายการสินค้าของคุณกำลังจัดส่ง');
     }
 }
