@@ -3,7 +3,7 @@ require_once "../../vendor/autoload.php";
 
 use Mpdf\Mpdf;
 
-$mpdf = new Mpdf(['mode' => 'utf-8']);
+$mpdf = new Mpdf(['mode' => 'utf-8','format' => 'A4']);
 $mpdf->autoScriptToLang = true;
 $mpdf->autoLangToFont = true;
 $mpdf->autoLangToFont = 'DejaVu Sans';
@@ -73,7 +73,7 @@ $htmlorigin = <<<EOB
         {$DataOrder}
         <tr>
             <td colspan="2" style="padding: 7px">รวมทั้งหมด</td>
-            <td colspan="4" style="padding: 7px">$Total บาท</td>
+            <td colspan="4" style="padding: 5px">$Total บาท</td>
         </tr>
     </tbody>
     </table>

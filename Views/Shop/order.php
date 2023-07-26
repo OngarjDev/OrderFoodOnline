@@ -60,7 +60,7 @@
                                     <?php } else { ?>
                                         <a href="#" class="btn btn-danger w-50" disabled>ผู้ส่งกำลังมารับสินค้า</a>
                                     <?php } ?>
-                                    <a href="" class="btn btn-primary w-50">พิมพ์ใบเสร็จ</a>
+                                    <a href="../Shares/receipt.pdf.php?IdOrder_Get=<?=$row['IdOrder']?>" class="btn btn-primary w-50">พิมพ์ใบเสร็จ</a>
                                 </div>
                             </div>
                         </div>
