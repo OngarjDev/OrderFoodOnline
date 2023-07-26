@@ -41,4 +41,8 @@ class shop
         $this->service->DeleteData("promotion","IdShop = {$request['IdShop_Get']}");
         header('location: ../Views/Shop/manageshop.php?Info_Get=ลบส่วนลดสำเร็จ');
     }
+    public function SendtoRider($request){
+        $this->service->UpdateTable("orders","StatusOrder = 1","IdOrder = {$request['IdOrder_Get']}");
+        header('location: ../Views/Shop/order.php?Info_Get=ผู้ส่งกำลังมารับสินค้า');
+    }
 }

@@ -32,6 +32,9 @@ class Shop_Controller
             case 'DeleteDiscount':
                 $this->shop->DeleteDiscount($_REQUEST);
                 break;
+            case 'SendtoRider':
+                $this->shop->SendtoRider($_REQUEST);
+                break;
             default:
                 header("location: " . $_SERVER['HTTP_REFERER'] . "?Info=" . urlencode("ขออภัยเราไม่พบ Actionในระบบของคุณ"));
         }

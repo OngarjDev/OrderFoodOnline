@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include '../Shares/header.layout.php' ?>
-    <title>รายการสั่งซื้อทั้งหมด</title>
+    <title>รายการที่รับ</title>
 </head>
 
-<body>
+<body> 
     <?php include 'navbar.layout.php' ?>
-    <main class="container">
+    <div class="container">
         <?php
+        require_once "../../Includes/autoload.inc.php";
         $service = new connect_database();
-        $result = $service->SelectTable(null, "orders", "Where IdShop = {$_SESSION['IdUser_Session']}");
-        foreach ($result as $row) { ?>
-            <div class="card mt-2">
+        $OrderList = $service->SelectTable(null, "Orders", "where IdRider = {$_SESSION['IdUser_Session']} AND StatusOrder = 2");
+        foreach ($OrderList as $row) { ?>
+            <div class="mt-2">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
@@ -25,6 +26,10 @@
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
+                                <?php 
+                                $userinfo = $service->SelectTable(null,"users","Where idAll = {$row['IdCustomer']}")->fetch_assoc()['AddressCustomer'];
+                                ?>
+                                <p>ที่อยู่ที่ต้องจัดส่ง: <?=$userinfo?></p>
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                         <tr class="table-info">
@@ -50,22 +55,14 @@
                                         } ?>
                                     </tbody>
                                 </table>
-                                <div class="input-group">
-                                    <?php
-                                    $OrderInfo = $service->SelectTable(null, "orders", "Where IdOrder = {$row['IdOrder']}")->fetch_assoc()['StatusOrder'];
-                                    if ($OrderInfo == 0) { ?>
-                                        <a href="../../Controllers/shop.ctr.php?action_Get=SendtoRider&IdOrder_Get=<?= $row['IdOrder'] ?>" class="btn btn-danger w-50">ยืนยันสินค้าที่จะจัดส่ง</a>
-                                    <?php } else { ?>
-                                        <a href="#" class="btn btn-danger w-50" disabled>ผู้ส่งกำลงมารับสินค้า</a>
-                                    <?php } ?>
-                                    <a href="" class="btn btn-primary w-50">พิมพ์ใบเสร็จ</a>
-                                </div>
+                                <a href="../../Controllers/rider.ctr.php?action_Get=ConfrimOrder&IdOrder_Get=<?= $row['IdOrder'] ?>" class="btn btn-primary w-100 mt-0">ยืนยันการชำระเงิน</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         <?php } ?>
+    </div>
     </main>
     <?php include '../Shares/footer.layout.php' ?>
 </body>
