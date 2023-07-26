@@ -10,6 +10,7 @@ $auth->CheckAuthorization();
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="index.php" class="nav-link px-2 link-secondary h-1">RiderThinkpad</a></li>
           <li><a href="index.php" class="nav-link px-2 link-dark">รายการคำสั่งซื้อ</a></li>
+          <li><a href="orderrider.php" class="nav-link px-2 link-dark">รายการที่รับ</a></li>
         </ul>
 
         <div class="dropdown text-end">

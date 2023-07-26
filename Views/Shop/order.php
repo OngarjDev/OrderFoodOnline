@@ -55,8 +55,10 @@
                                     $OrderInfo = $service->SelectTable(null, "orders", "Where IdOrder = {$row['IdOrder']}")->fetch_assoc()['StatusOrder'];
                                     if ($OrderInfo == 0) { ?>
                                         <a href="../../Controllers/shop.ctr.php?action_Get=SendtoRider&IdOrder_Get=<?= $row['IdOrder'] ?>" class="btn btn-danger w-50">ยืนยันสินค้าที่จะจัดส่ง</a>
+                                    <?php } else if ($OrderInfo == 3) { ?>
+                                        <a href="#" class="btn btn-success w-50" disabled>อาหารถูกส่งถึงลูกค้าแล้ว</a>
                                     <?php } else { ?>
-                                        <a href="#" class="btn btn-danger w-50" disabled>ผู้ส่งกำลงมารับสินค้า</a>
+                                        <a href="#" class="btn btn-danger w-50" disabled>ผู้ส่งกำลังมารับสินค้า</a>
                                     <?php } ?>
                                     <a href="" class="btn btn-primary w-50">พิมพ์ใบเสร็จ</a>
                                 </div>
