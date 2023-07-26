@@ -12,7 +12,12 @@
   <?php include 'navbar.layout.php' ?>
   <main class="container">
     <div class="p-3 rounded-3 bg-light">
-      <a class="btn btn-primary w-100" href="../Shares/sales_report.pdf.php">สรุปยอดขายวันนี้</a>
+      <h3 class="text-center">รายงานสรุปการขาย</h3>
+      <div class="btn-group w-100">
+      <a class="btn btn-primary" href="../Shares/sales_report.pdf.php?Type_Get=Date">สรุปยอดขายวันนี้</a>
+      <a class="btn btn-success" href="../Shares/sales_report.pdf.php?Type_Get=Month">สรุปยอดขายเดือนนี้</a>
+      <a class="btn btn-primary" href="../Shares/sales_report.pdf.php?Type_Get=Year">สรุปยอดขายปีนี้</a>
+    </div>
     </div>
     <?php
     $service = new connect_database();
