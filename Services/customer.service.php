@@ -36,13 +36,13 @@ class customer{
             $persen = $FoodInfo['PriceFood'] * $promotion / 100;
             $priceorigin = ($FoodInfo['PriceFood'] - $persen) * $FoodCart['amount'];
             array_push($sumprice, $priceorigin);
-            $newItem = ['IdFood' => $FoodInfo['IdFood'],'NameFood'=>$FoodInfo['NameFood'], 'amount' => $FoodCart['amount'] ?? 1];
+            $newItem = ['IdFood' => $FoodInfo['IdFood'],'NameFood'=>$FoodInfo['NameFood'], 'amount' => $FoodCart['amount'] ?? 1,'PriceFood' => $priceorigin];
             array_push($existingCartData,$newItem);
         }
         $sum = array_sum($sumprice);
         $currentDate = date('Y-m-d');
         // ทำการ serialized ข้อมูลและเก็บใน cookie
-        $jsonCartData = json_encode($existingCartData);
+        $jsonCartData = json_encode($existingCartData, JSON_UNESCAPED_UNICODE);
         $this->service->InsertTable("orders","IdCustomer,FoodOrder,PriceOrder,StatusOrder,DateOrder","'{$_SESSION['IdUser_Session']}','$jsonCartData',$sum,0,'$currentDate'",null);
         setcookie('cart', '', 0, '/');
         header('location: ../Views/Customer/order.php?Info_Get=รายการสินค้าของคุณกำลังจัดส่ง');
