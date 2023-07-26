@@ -72,8 +72,9 @@ class Customer_Controller
         if ($foundIndex !== -1) {
             $existingCartData[$foundIndex]['amount'] += $amountToAdd;
         } else {
+            $result = $this->service->SelectTable(null,"food","Where IdFood = $idFoodToAdd")->fetch_assoc()['IdShop'];
             // ถ้ายังไม่เจอให้เพิ่มรายการสินค้าใหม่ลงในตะกร้า
-            $newItem = ['IdFood' => $idFoodToAdd, 'amount' => $amountToAdd ?? 1];
+            $newItem = ['IdFood' => $idFoodToAdd, 'amount' => $amountToAdd ?? 1,'IdShop' => $result];
             $existingCartData[] = $newItem;
         }
 

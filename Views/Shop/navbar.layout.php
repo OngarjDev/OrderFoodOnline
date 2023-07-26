@@ -11,7 +11,7 @@ $auth->CheckAuthorization();
           <li><a href="index.php" class="nav-link px-2 link-secondary h-1">ShopThinkpad</a></li>
           <li><a href="index.php" class="nav-link px-2 link-dark">รายการอาหาร</a></li>
           <li><a href="categoryfood.php" class="nav-link px-2 link-dark">หมวดหมู่อาหาร</a></li>
-          <li><a href="index.php" class="nav-link px-2 link-dark">ตรวจสอบคำสั่งซื้อ</a></li>
+          <li><a href="order.php" class="nav-link px-2 link-dark">ตรวจสอบคำสั่งซื้อ</a></li>
           <li><a href="manageshop.php" class="nav-link px-2 link-dark">จัดการร้านอาหาร</a></li>
         </ul>
 
