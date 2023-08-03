@@ -16,61 +16,98 @@
 
 
 -- Dumping database structure for orderfoodonline
+DROP DATABASE IF EXISTS `orderfoodonline`;
 CREATE DATABASE IF NOT EXISTS `orderfoodonline` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `orderfoodonline`;
 
 -- Dumping structure for table orderfoodonline.food
+DROP TABLE IF EXISTS `food`;
 CREATE TABLE IF NOT EXISTS `food` (
   `IdFood` int(11) NOT NULL AUTO_INCREMENT,
-  `NameFood` int(11) NOT NULL,
-  `PriceFood` float NOT NULL,
-  `ImageFood` varchar(50) DEFAULT NULL,
-  `NameTypeFood` int(11) DEFAULT NULL,
+  `IdTypeFood` int(11) NOT NULL,
+  `NameFood` varchar(50) NOT NULL DEFAULT '',
+  `PriceFood` int(11) NOT NULL DEFAULT 0,
+  `ImageFood` varchar(50) NOT NULL,
+  `IdShop` int(11) NOT NULL,
   PRIMARY KEY (`IdFood`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Data exporting was unselected.
 
--- Dumping structure for table orderfoodonline.order
-CREATE TABLE IF NOT EXISTS `order` (
+-- Dumping structure for table orderfoodonline.orders
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
   `IdOrder` int(11) NOT NULL AUTO_INCREMENT,
-  `IdCustomer` int(11) NOT NULL DEFAULT 0,
-  `IdShop` int(11) NOT NULL DEFAULT 0,
-  `IdRider` int(11) NOT NULL DEFAULT 0,
-  `IdPromotion` int(11) NOT NULL DEFAULT 0,
+  `IdCustomer` int(11) NOT NULL,
+  `IdShop` int(11) NOT NULL,
+  `IdRider` int(11) DEFAULT NULL,
   `FoodOrder` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`FoodOrder`)),
-  `PriceOrder` float DEFAULT 0,
-  `StatusOrder` int(11) DEFAULT 0,
+  `PriceOrder` float DEFAULT NULL,
+  `StatusOrder` int(11) DEFAULT NULL,
   `DateOrder` date DEFAULT NULL,
   PRIMARY KEY (`IdOrder`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Data exporting was unselected.
 
 -- Dumping structure for table orderfoodonline.promotion
+DROP TABLE IF EXISTS `promotion`;
 CREATE TABLE IF NOT EXISTS `promotion` (
   `IdPromotion` int(11) NOT NULL AUTO_INCREMENT,
-  `NamePromotion` varchar(50) NOT NULL,
   `PersenPromotion` int(11) NOT NULL,
+  `IdShop` int(11) NOT NULL,
   PRIMARY KEY (`IdPromotion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table orderfoodonline.review
+DROP TABLE IF EXISTS `review`;
+CREATE TABLE IF NOT EXISTS `review` (
+  `IdReview` int(11) NOT NULL AUTO_INCREMENT,
+  `IdUser` int(11) NOT NULL DEFAULT 0,
+  `IdFood` int(11) NOT NULL,
+  `Comment` varchar(50) NOT NULL,
+  PRIMARY KEY (`IdReview`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table orderfoodonline.typefood
+DROP TABLE IF EXISTS `typefood`;
+CREATE TABLE IF NOT EXISTS `typefood` (
+  `IdTypeFood` int(11) NOT NULL AUTO_INCREMENT,
+  `IdShop` int(11) NOT NULL,
+  `NameTypeFood` varchar(255) NOT NULL,
+  PRIMARY KEY (`IdTypeFood`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Data exporting was unselected.
+
+-- Dumping structure for table orderfoodonline.typeshop
+DROP TABLE IF EXISTS `typeshop`;
+CREATE TABLE IF NOT EXISTS `typeshop` (
+  `IdTypeShop` int(11) NOT NULL AUTO_INCREMENT,
+  `NameTypeShop` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`IdTypeShop`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Data exporting was unselected.
 
 -- Dumping structure for table orderfoodonline.users
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `idAll` int(11) NOT NULL AUTO_INCREMENT,
   `NameAll` varchar(50) NOT NULL,
   `PasswordAll` varchar(50) NOT NULL,
   `DescriptionShop` varchar(255) DEFAULT NULL,
   `AddressCustomer` varchar(255) DEFAULT NULL,
-  `ImageAll` varchar(255) NOT NULL,
-  `WaitPermisionSCR` int(11) DEFAULT 0,
-  `SuspensionSCR` int(11) DEFAULT 0,
+  `ImageAll` varchar(255) DEFAULT '../../Src/Images/Unknown.png',
+  `AccessStatusSCR` int(11) DEFAULT 0,
   `RoleAll` varchar(255) NOT NULL,
-  `TypeShopS` varchar(255) DEFAULT NULL,
+  `IdTypeShop` int(11) DEFAULT NULL,
   PRIMARY KEY (`idAll`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Data exporting was unselected.
 
