@@ -1,7 +1,4 @@
-<?php
-
-use Mpdf\Tag\HGroup;
-
+<?php 
 require_once dirname(__DIR__) .'/Includes/autoload.inc.php';
 class admin{
     protected $service;
